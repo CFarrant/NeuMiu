@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class NeuMiuApp extends Application {
+public class NeuMiuApp extends Application{
 
 	public static void main(String[] args) {
 		Application.launch(NeuMiuApp.class, args);
