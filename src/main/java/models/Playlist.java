@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Playlist {
 
-	private ArrayList<Playlist> play;
+	private ArrayList<Track> play;
 	
 	private String ListName;
 	
@@ -12,16 +12,16 @@ public class Playlist {
 		
 	}
 	
-	public Playlist(String n, ArrayList<Playlist> play) {
+	public Playlist(String n, ArrayList<Track> play) {
 		this.setListName(n);
 		this.setPlay(play);
 	}
 
-	public ArrayList<Playlist> getPlay() {
+	public ArrayList<Track> getPlay() {
 		return play;
 	}
 
-	public void setPlay(ArrayList<Playlist> play) {
+	public void setPlay(ArrayList<Track> play) {
 		this.play = play;
 	}
 

@@ -7,6 +7,7 @@ public class PlaylistController extends ArrayList<Playlist> {
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Playlist> listsOfPlaylists;
+	private final String savePath = "//Playlists//";
 
 	public PlaylistController() {
 
@@ -20,12 +21,20 @@ public class PlaylistController extends ArrayList<Playlist> {
 		this.listsOfPlaylists = listsOfPlaylists;
 	}
 
-	public void displayList(ArrayList<Playlist> f) {
+	public void displayList(ArrayList<Playlist> playlists) {
 
 	}
 	
 	public void removePlaylist(String name) {
 
-}
-
+	}
+	
+	public void savePlaylist(Playlist p) {
+		String fileName = p.getListName() + ".playlist";
+		System.out.println(savePath+fileName);
+	}
+	
+	public void loadPlaylist() {
+		
+	}
 }
