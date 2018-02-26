@@ -26,6 +26,13 @@ public class PlaylistController extends ArrayList<Playlist> {
 	
 	public void removePlaylist(String name) {
 
-}
-
+	}
+	
+	public void savePlaylist() {
+		
+	}
+	
+	public void loadPlaylist() {
+		
+	}
 }
