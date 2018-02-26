@@ -5,13 +5,17 @@ A music player that sorts music by the user's choice in to multiple different ty
 
 ### Scope Exclusions
 *Will not do my laundry, make me a sandwich, or any other form of housekeeping.
-
 *Music will need to be manually imported, it will not automatically search audio files.
-
 *This is a music player, so it will only support audio. NO VIDEO.
-
 *Is a single user application, not an online music service.
-
 *Only supports common audio codecs, like: MP3, WAV, OGG, (and possibly FLAC).
-
 *There will be no support for proprietary audio formats. (AAC, etc…), only common codecs will be supported.
+
+### Specific Terms
+MIDI - Musical Instrument Digital Interface
+MP3 - MPEG (Motion Picture Experts Group) Layer-3
+OGG - Jargon for Ogging
+M4A - Different form of compression for MP3’s
+WAV - Waveform Audio File
+EQ - Equalization
+
