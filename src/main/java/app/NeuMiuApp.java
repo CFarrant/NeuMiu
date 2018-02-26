@@ -13,5 +13,4 @@ public class NeuMiuApp extends Application {
 	public void start(Stage arg0) throws Exception {
 
 	}
-
 }
