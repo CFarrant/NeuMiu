@@ -1,5 +1,6 @@
 package control;
 
+import enums.VolumeLevel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -22,7 +23,10 @@ public class ControlApp {
 	private Slider volumeSlider;
 	
 	@FXML
-	private CheckBox muteButton;
+	private CheckBox muteBox;
+	
+	@FXML
+	private CheckBox shuffleBox;
 	
 	@FXML
 	private ImageView coverArt;
@@ -53,5 +57,68 @@ public class ControlApp {
 	
 	@FXML
 	private Button nextSong;
+	
+	private boolean mute;
+	private VolumeLevel volume = VolumeLevel.MEDIUM;
+
+	public ControlApp() {
+
+	}
+
+	public void run() {
+
+	}
+
+	public boolean isMute() {
+		return mute;
+	}
+
+	public void setMute(boolean mute) {
+		this.mute = mute;
+	}
+
+	public VolumeLevel getVolume() {
+		return volume;
+	}
+
+	public void setVolume(VolumeLevel volume) {
+		this.volume = volume;
+	}
+
+	public void shuffel() {
+
+	}
+
+	public int volume(int vol) {
+		return vol;
+	}
+
+	public void mute(boolean mute) {
+		if (mute == true) {
+
+		} else {
+
+		}
+	}
+	
+	public void play() {
+
+	}
+
+	public void nextSong() {
+
+	}
+
+	public void prevSong() {
+
+	}
+
+	public void pause() {
+
+	}
+
+	public void stop() {
+
+	}
 	
 }

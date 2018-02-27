@@ -46,9 +46,14 @@
                               <Slider fx:id="volumeSlider" orientation="VERTICAL" />
                            </graphic>
                         </MenuItem>
-                        <MenuItem mnemonicParsing="false" text="Mute">
+                        <MenuItem fx:id="muteBox" mnemonicParsing="false" text="Mute">
                            <graphic>
                               <CheckBox fx:id="muteButton" mnemonicParsing="false" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Shuffle">
+                           <graphic>
+                              <CheckBox fx:id="shuffleBox" mnemonicParsing="false" />
                            </graphic>
                         </MenuItem>
                      </items>
