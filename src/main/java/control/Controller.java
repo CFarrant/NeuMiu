@@ -1,9 +1,11 @@
 package control;
 
+import enums.VolumeLevel;
+
 public class Controller {
 
 	private boolean mute;
-	private int volume;
+	private VolumeLevel volume = VolumeLevel.MEDIUM;
 
 	public Controller() {
 
@@ -21,11 +23,11 @@ public class Controller {
 		this.mute = mute;
 	}
 
-	public int getVolume() {
+	public VolumeLevel getVolume() {
 		return volume;
 	}
 
-	public void setVolume(int volume) {
+	public void setVolume(VolumeLevel volume) {
 		this.volume = volume;
 	}
 
@@ -61,8 +63,12 @@ public class Controller {
 		return vol;
 	}
 
-	public boolean mute(boolean mute) {
-		return mute;
+	public void mute(boolean mute) {
+		if (mute == true) {
+			
+		}
+		else {
+			
+		}
 	}
-
 }
