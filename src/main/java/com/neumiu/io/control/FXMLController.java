@@ -1,6 +1,7 @@
-package control;
+package com.neumiu.io.control;
 
-import enums.VolumeLevel;
+import com.neumiu.io.enums.VolumeLevel;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;

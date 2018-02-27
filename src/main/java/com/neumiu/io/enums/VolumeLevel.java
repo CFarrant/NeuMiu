@@ -1,4 +1,4 @@
-package enums;
+package com.neumiu.io.enums;
 
 public enum VolumeLevel {
 	MUTE,

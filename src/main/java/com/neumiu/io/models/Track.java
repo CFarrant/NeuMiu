@@ -1,4 +1,4 @@
-package models;
+package com.neumiu.io.models;
 
 public class Track {
 

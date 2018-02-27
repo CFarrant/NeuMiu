@@ -1,8 +1,8 @@
-package control;
+package com.neumiu.io.control;
 
 import java.util.ArrayList;
 
-import models.Playlist;
+import com.neumiu.io.models.Playlist;
 
 public class PlaylistController extends ArrayList<Playlist> {
 
