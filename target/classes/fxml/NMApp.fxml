@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Songs">
+          <items>
+            <MenuItem fx:id="AddSong" mnemonicParsing="false" text="Add New Song" />
+                  <MenuItem fx:id="DeleteSong" mnemonicParsing="false" text="Delete Song" />
+            <SeparatorMenuItem fx:id="Sep1" mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem fx:id="Sep2" mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" text="New" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Settings">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo">
+                     <graphic>
+                        <MenuButton mnemonicParsing="false" text="MenuButton">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                        </MenuButton>
+                     </graphic></MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem fx:id="About" mnemonicParsing="false" text="About NeuMiu" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <items>
+        <AnchorPane>
+          <children>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Playlists" textAlignment="CENTER" wrapText="false">
+              <font>
+                <Font size="18.0" fx:id="x1" />
+              </font>
+              <textFill>
+                <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
+              </textFill>
+            </Label>
+          </children>
+        </AnchorPane>
+        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+          <content>
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
+              <children>
+                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Songs" textAlignment="CENTER" textFill="$x2" wrapText="false">
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem fx:id="NewSong" mnemonicParsing="false" onAction="#AddSong" text="Song" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu></Label>
+                        <Accordion layoutX="105.0" layoutY="147.0" />
+                        <VBox layoutX="-1.0" layoutY="325.0" prefHeight="224.0" prefWidth="662.0">
+                           <children>
+                              <SplitPane dividerPositions="0.3" prefHeight="232.0" prefWidth="662.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="459.0">
+                                       <children>
+                                          <Pane fx:id="nowPlaying" layoutY="-2.0" prefHeight="225.0" prefWidth="459.0">
+                                             <children>
+                                                <Slider layoutX="2.0" layoutY="62.0" prefHeight="14.0" prefWidth="455.0" />
+                                                <Button layoutX="306.0" layoutY="88.0" mnemonicParsing="false" text="Button" />
+                                                <Button layoutX="216.0" layoutY="88.0" mnemonicParsing="false" text="Button" />
+                                                <Button layoutX="126.0" layoutY="88.0" mnemonicParsing="false" text="Button" />
+                                                <Button layoutX="34.0" layoutY="88.0" mnemonicParsing="false" text="Button">
+                                                   <font>
+                                                      <Font name="Comic Sans MS" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button layoutX="384.0" layoutY="88.0" mnemonicParsing="false" text="Button" />
+                                                <ToggleButton layoutX="34.0" layoutY="170.0" mnemonicParsing="false" text="ToggleButton" textAlignment="CENTER" textFill="#0d13bf" />
+                                                <ProgressBar layoutX="1.0" layoutY="5.0" prefHeight="18.0" prefWidth="458.0" progress="0.0" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </VBox>
+              </children>
+            </AnchorPane>
+          </content>
+        </ScrollPane>
+      </items>
+    </SplitPane>
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+      <children>
+        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
+          <font>
+            <Font size="11.0" fx:id="x3" />
+          </font>
+          <textFill>
+            <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
+          </textFill>
+        </Label>
+        <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+        <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+      </children>
+      <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+      </padding>
+    </HBox>
+  </children>
+</VBox>
