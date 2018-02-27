@@ -21,10 +21,18 @@
 >__WAV__ ~ _Waveform Audio File_.  
 >__EQ__ ~ _Equalizer(Equalization)_.
 
-### Technical Requirements:  
+### Planned Features:  
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Features                          | Summary          |
+| --------------------------------- |:----------------:|
+| Add Music                         | Allows user to upload music                                                                       |
+| Edit Music Info                   | Allows user to alter the info of the song.                                                         |
+| Audio Controls                    | Allows changing, or pausing/playing a song.                                                       |
+| Seek Bar                          | Allows jumping to certain points of a song.                                                       |
+| Volume Slider                     | Allows controlling how loud the output audio is.                                                  |
+| Create/Edit Playlists             | Allows adding select tracks into a playlist that can be played.                                   |
+| Time Stamping                     | Allows Users to place flags at certain times points.                                                |
+| EQ~ing                            | Lets users have their own unique EQ settings.                                                     |
+| Youtube to MP3                    | Automatically transforms a Youtube Link into a MP3 File.                                           |
+| Song Shuffling                    | Shuffles songs.                                                                                    |
+| Sort by: Length/Title/Import Date | Allows users to sort their songs via their length, title, or the date that they were Imported on. |
