@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.ControlApp">
    <children>
       <VBox>
          <children>
@@ -29,7 +29,7 @@
                   <items>
                     <MenuItem mnemonicParsing="false" text="Add Song" />
                     <MenuItem mnemonicParsing="false" text="Edit Song" />
-                        <MenuItem mnemonicParsing="false" text="Remove Song" />
+                    <MenuItem mnemonicParsing="false" text="Remove Song" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Playlists">
@@ -43,12 +43,12 @@
                      <items>
                         <MenuItem mnemonicParsing="false" text="Volume">
                            <graphic>
-                              <Slider orientation="VERTICAL" />
+                              <Slider fx:id="volumeSlider" orientation="VERTICAL" />
                            </graphic>
                         </MenuItem>
                         <MenuItem mnemonicParsing="false" text="Mute">
                            <graphic>
-                              <CheckBox mnemonicParsing="false" />
+                              <CheckBox fx:id="muteButton" mnemonicParsing="false" />
                            </graphic>
                         </MenuItem>
                      </items>
@@ -75,7 +75,7 @@
                                                 <Font name="Copperplate Gothic Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <TreeView prefWidth="200.0" />
+                                          <TreeView fx:id="playlistTree" prefWidth="200.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -89,7 +89,7 @@
                                                 <Font name="Copperplate Gothic Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <ListView prefHeight="387.0" prefWidth="600.0" />
+                                          <ListView fx:id="songInPlaylist" prefHeight="387.0" prefWidth="600.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -102,7 +102,7 @@
                      <children>
                         <SplitPane dividerPositions="0.5">
                           <items>
-                              <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="coverArt" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <VBox prefHeight="100.0" prefWidth="700.0">
                                  <children>
                                     <Label text="Now Playing:">
@@ -110,12 +110,12 @@
                                           <Font name="Copperplate Gothic Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <TextField>
+                                    <TextField fx:id="currentlyPlaying">
                                        <VBox.margin>
                                           <Insets bottom="30.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Slider prefHeight="50.0">
+                                    <Slider fx:id="seekBar" prefHeight="50.0">
                                        <VBox.margin>
                                           <Insets left="5.0" />
                                        </VBox.margin>
@@ -153,7 +153,7 @@
                                                 <Font name="Copperplate Gothic Light" size="12.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="prevSong2" mnemonicParsing="false" text="Stop">
+                                          <Button fx:id="stopSong" mnemonicParsing="false" text="Stop">
                                              <font>
                                                 <Font name="Copperplate Gothic Light" size="12.0" />
                                              </font>
@@ -161,7 +161,7 @@
                                                 <Insets right="15.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button fx:id="prevSong4" mnemonicParsing="false" text="Pause">
+                                          <Button fx:id="pauseSong" mnemonicParsing="false" text="Pause">
                                              <font>
                                                 <Font name="Copperplate Gothic Light" size="12.0" />
                                              </font>
@@ -169,7 +169,7 @@
                                                 <Insets right="15.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button fx:id="prevSong3" mnemonicParsing="false" text="Play">
+                                          <Button fx:id="playSong" mnemonicParsing="false" text="Play">
                                              <font>
                                                 <Font name="Copperplate Gothic Light" size="12.0" />
                                              </font>
@@ -177,7 +177,7 @@
                                                 <Insets right="15.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button fx:id="prevSong1" mnemonicParsing="false" text="Next Song">
+                                          <Button fx:id="nextSong" mnemonicParsing="false" text="Next Song">
                                              <font>
                                                 <Font name="Copperplate Gothic Light" size="12.0" />
                                              </font>
