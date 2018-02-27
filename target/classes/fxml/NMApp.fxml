@@ -48,7 +48,12 @@
                         </MenuItem>
                         <MenuItem mnemonicParsing="false" text="Mute">
                            <graphic>
-                              <CheckBox fx:id="muteButton" mnemonicParsing="false" />
+                              <CheckBox fx:id="muteBox" mnemonicParsing="false" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Shuffle">
+                           <graphic>
+                              <CheckBox fx:id="shuffleBox" mnemonicParsing="false" />
                            </graphic>
                         </MenuItem>
                      </items>
