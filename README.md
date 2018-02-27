@@ -25,14 +25,15 @@
 
 >| Features | Summary | Status |
 >| -------- |:-------:|:------:|
->| Add Music | Allows user to upload music. | IN PROGRESS |
->| Edit Music Info | Allows user to alter the info of the song. | IN PROGRESS |
->| Audio Controls | Allows changing, or pausing/playing a song. | IN PROGRESS |
->| Seek Bar | Allows jumping to certain points of a song. | IN PROGRESS |
->| Volume Slider | Allows controlling how loud the output audio is. | IN PROGRESS |
->| Create/Edit Playlists | Allows adding select tracks into a playlist that can be played. | IN PROGRESS |
->| Time Stamping | Allows Users to place flags at certain times points. | IN PROGRESS |
->| EQ~ing | Lets users have their own unique EQ settings. | IN PROGRESS |
->| Youtube to MP3 | Automatically transforms a Youtube Link into a MP3 File. | IN PROGRESS |
->| Song Shuffling | Shuffles songs. | IN PROGRESS |
->| Sort by: Length/Title/Import Date | Allows users to sort their songs via their length, title, or the date that they were Imported on. | IN PROGRESS |
+>| Functional/Intuitive GUI | Allows ease of access to a user. | IN PROGRESS |
+>| Add Music | Allows user to import music. | PLANNED |
+>| Edit Music Info | Allows user to modify the info of the song. | PLANNED |
+>| Audio Controls | Allows changing, pausing or playing a song. | PLANNED |
+>| Seek Bar | Allows jumping to certain points of a song. | PLANNED |
+>| Volume Slider | Allows controlling how loud the output audio is. | PLANNED |
+>| Create/Edit Playlists | Allows adding select tracks into a playlist that can be played. | PLANNED |
+>| Song Shuffling | Shuffles songs. | PLANNED |
+>| Sort by: Length/Title/Import Date | Allows users to sort their songs via their length, title, or the date that they were Imported on. | PLANNED |
+>| Time Stamping | Allows Users to place flags at certain times points. | STRETCH |
+>| EQ~ing | Lets users have their own unique EQ settings. | STRETCH |
+>| Youtube to MP3 | Automatically transforms a Youtube Link into a MP3 File. | STRETCH |
