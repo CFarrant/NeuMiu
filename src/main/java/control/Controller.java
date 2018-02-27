@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 
-public class ControlApp {
+public class Controller {
 
 	@FXML
 	private TreeView<?> playlistTree;
@@ -61,7 +61,7 @@ public class ControlApp {
 	private boolean mute;
 	private VolumeLevel volume = VolumeLevel.MEDIUM;
 
-	public ControlApp() {
+	public Controller() {
 
 	}
 

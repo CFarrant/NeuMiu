@@ -1,6 +1,8 @@
-package models;
+package control;
 
 import java.util.ArrayList;
+
+import models.Playlist;
 
 public class PlaylistController extends ArrayList<Playlist> {
 
