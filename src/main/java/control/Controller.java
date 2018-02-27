@@ -65,10 +65,9 @@ public class Controller {
 
 	public void mute(boolean mute) {
 		if (mute == true) {
-			
-		}
-		else {
-			
+
+		} else {
+
 		}
 	}
 }
