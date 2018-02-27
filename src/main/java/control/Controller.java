@@ -31,7 +31,7 @@ public class Controller {
 		this.volume = volume;
 	}
 
-	public void playSong() {
+	public void play() {
 
 	}
 
