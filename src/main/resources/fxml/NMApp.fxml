@@ -132,7 +132,7 @@
                                     </Slider>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label fx:id="curTime" text="XX:XX:XX">
+                                          <Label fx:id="curTime">
                                              <font>
                                                 <Font name="Copperplate Gothic Bold" size="12.0" />
                                              </font>
@@ -140,12 +140,12 @@
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <Label fx:id="totalTime" text="XX:XX:XX">
+                                          <Label fx:id="totalTime">
                                              <font>
                                                 <Font name="Copperplate Gothic Bold" size="12.0" />
                                              </font>
                                              <HBox.margin>
-                                                <Insets left="470.0" />
+                                                <Insets left="530.0" />
                                              </HBox.margin>
                                           </Label>
                                        </children>
@@ -179,7 +179,7 @@
                                                 <Insets right="15.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button fx:id="playSong" mnemonicParsing="false" text="Play">
+                                          <Button fx:id="playSong" onAction="#play" mnemonicParsing="false" text="Play">
                                              <font>
                                                 <Font name="Copperplate Gothic Light" size="12.0" />
                                              </font>

@@ -1,7 +1,13 @@
 package com.neumiu.io.control;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import com.neumiu.io.enums.VolumeLevel;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -10,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class FXMLController {
@@ -103,7 +110,20 @@ public class FXMLController {
 	}
 	
 	public void play() {
-
+		playSong.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				String path = "images/e1m1.jpg";
+				String artist = "Unknown";
+				String title = "Gates to Hell, E1M1";
+				String fullPlayTime = "3:59";
+				String currentTime = "0:00";
+				updateArtwork(path);
+				updatePlaying(artist, title);
+				updateTotalTime(fullPlayTime);
+				updateCurTime(currentTime);
+			}
+		});
 	}
 
 	public void nextSong() {
@@ -120,5 +140,21 @@ public class FXMLController {
 
 	public void stop() {
 
+	}
+	
+	public void updateArtwork(String path) {
+		coverArt.setImage(new Image(path));
+	}
+	
+	public void updatePlaying(String artist, String title) {
+		currentlyPlaying.setText(artist+" ~ "+title);
+	}
+	
+	public void updateCurTime(String currentTime) {
+		curTime.setText(currentTime);
+	}
+	
+	public void updateTotalTime(String fullTime) {
+		totalTime.setText(fullTime);
 	}
 }
