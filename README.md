@@ -14,10 +14,9 @@
 
 ### Specific Terms:
 >__CODEC__ ~ _a device or program that compresses data to enable faster transmission and decompresses received data_.  
->__MIDI__ ~ _Musical Instrument Digital Interface_.  
 >__MP3__ ~ _MPEG (Motion Picture Experts Group) Layer-3_.  
 >__OGG__ ~ _Jargon for Ogging_.  
->__M4A__ ~ _Different form of compression for MP3’s_.  
+>__FLAC__ ~ _Free Lossless Audio Codec_.  
 >__WAV__ ~ _Waveform Audio File_.  
 >__EQ__ ~ _Equalizer(Equalization)_.
 
