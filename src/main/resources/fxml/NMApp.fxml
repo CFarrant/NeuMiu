@@ -18,8 +18,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
 
-<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FXMLController">
+<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neumiu.io.control.FXMLController">
    <children>
       <VBox>
          <children>
@@ -107,7 +108,11 @@
                      <children>
                         <SplitPane dividerPositions="0.5">
                           <items>
-                              <ImageView fx:id="coverArt" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="coverArt" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              	<image>
+                                	<Image url="images/NoArtwork.png" />
+                                </image>
+                              </ImageView>
                               <VBox prefHeight="100.0" prefWidth="700.0">
                                  <children>
                                     <Label text="Now Playing:">
