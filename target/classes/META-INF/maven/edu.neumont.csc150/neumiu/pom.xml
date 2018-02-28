@@ -23,5 +23,11 @@
     		<artifactId>jflac-codec</artifactId>
     		<version>1.5.2</version>
 		</dependency>
-  	</dependencies>
+		<dependency>
+			<!-- https://mvnrepository.com/artifact/com.googlecode.soundlibs/mp3spi -->
+    		<groupId>com.googlecode.soundlibs</groupId>
+    		<artifactId>mp3spi</artifactId>
+    		<version>1.9.5.4</version>
+		</dependency>
+	</dependencies>
 </project>
