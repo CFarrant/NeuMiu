@@ -1,12 +1,13 @@
 package com.neumiu.io.control;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import com.neumiu.io.enums.VolumeLevel;
+import com.neumiu.io.utils.ApplicationData;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -22,18 +24,18 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class FXMLController {
+	
+	private PlaylistController playlist;
+	private TrackController track;
+	private ApplicationData appData;
+	private String fileName = "NeuMiu.db";
 
 	@FXML
 	private TreeView<?> playlistTree;
@@ -101,8 +103,8 @@ public class FXMLController {
 	private boolean mute;
 	private VolumeLevel volume = VolumeLevel.MEDIUM;
 	
-	private void showAlert(String title, String header, String text) {
-		 Alert alert = new Alert(AlertType.INFORMATION);
+	private void showAlert(String title, String header, String text, AlertType type) {
+		 Alert alert = new Alert(type);
 		 alert.setTitle(title);
 		 alert.setHeaderText(header);
 		 alert.setContentText(text);
@@ -110,7 +112,13 @@ public class FXMLController {
 	 }
 
 	public FXMLController() {
-
+		playlist = new PlaylistController();
+		track = new TrackController();
+		try {
+			this.loadApplicationData();
+		} catch (ClassNotFoundException | IOException e) {
+			appData = new ApplicationData();
+		}
 	}
 
 	public void run() {
@@ -166,6 +174,10 @@ public class FXMLController {
 		});
 	}
 
+	public void createSong() {
+		appData.getTracks().add(track.addTrack());
+	}
+	
 	public void nextSong() {
 
 	}
@@ -196,5 +208,18 @@ public class FXMLController {
 
 	public void updateTotalTime(String fullTime) {
 		totalTime.setText(fullTime);
+	}
+
+	private void saveApplicationData() throws IOException {
+		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
+			out.writeObject(this.appData);
+		}
+	}
+	
+	public ApplicationData loadApplicationData() throws ClassNotFoundException, IOException {
+		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
+			this.appData = (ApplicationData)in.readObject();
+		}
+		return appData;
 	}
 }
