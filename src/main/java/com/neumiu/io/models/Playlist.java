@@ -1,16 +1,14 @@
-package models;
+package com.neumiu.io.models;
 
 import java.util.ArrayList;
 
 public class Playlist {
 
 	private ArrayList<Track> play;
+	private String listName;
+	private static int untitledCount = 1;
 	
-	private String ListName;
-	
-	public Playlist() {
-		
-	}
+	public Playlist() {}
 	
 	public Playlist(String n, ArrayList<Track> play) {
 		this.setListName(n);
@@ -26,13 +24,19 @@ public class Playlist {
 	}
 
 	public String getListName() {
-		return ListName;
+		return listName;
 	}
 
 	public void setListName(String listName) {
-		ListName = listName;
+		if (listName == null || listName.isEmpty()) {
+			if (untitledCount == 0) {
+				this.listName = ("Untitled");
+			}
+			else if (untitledCount > 0) {
+				this.listName = ("Untitled"+untitledCount);	
+			}
+			untitledCount++;
+		}
+		this.listName = listName;
 	}
-	
-	
-	
 }

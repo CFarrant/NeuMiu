@@ -1,4 +1,4 @@
-package app;
+package com.neumiu.io.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

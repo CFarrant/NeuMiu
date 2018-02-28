@@ -19,7 +19,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.ControlApp">
+<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" 
+minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" 
+xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FXMLController">
    <children>
       <VBox>
          <children>
@@ -48,7 +50,12 @@
                         </MenuItem>
                         <MenuItem mnemonicParsing="false" text="Mute">
                            <graphic>
-                              <CheckBox fx:id="muteButton" mnemonicParsing="false" />
+                              <CheckBox fx:id="muteBox" mnemonicParsing="false" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Shuffle">
+                           <graphic>
+                              <CheckBox fx:id="shuffleBox" mnemonicParsing="false" />
                            </graphic>
                         </MenuItem>
                      </items>
