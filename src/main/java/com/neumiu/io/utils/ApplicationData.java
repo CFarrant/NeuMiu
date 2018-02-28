@@ -7,20 +7,20 @@ import com.neumiu.io.models.Track;
 
 public class ApplicationData {
 
-	private ArrayList<Track> tracks;
+	private ArrayList<Track> allSongs;
 	private ArrayList<Playlist> playlists;
 	
 	public ApplicationData() {
-		tracks = new ArrayList<>();
+		allSongs = new ArrayList<>();
 		playlists = new ArrayList<>();
 	}
 
 	public ArrayList<Track> getTracks() {
-		return tracks;
+		return allSongs;
 	}
 
 	public void setTracks(ArrayList<Track> tracks) {
-		this.tracks = tracks;
+		this.allSongs = tracks;
 	}
 
 	public ArrayList<Playlist> getPlaylists() {
