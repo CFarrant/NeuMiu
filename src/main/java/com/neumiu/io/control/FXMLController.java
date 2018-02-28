@@ -2,10 +2,6 @@ package com.neumiu.io.control;
 
 import java.io.IOException;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import com.neumiu.io.enums.VolumeLevel;
 
 import javafx.event.ActionEvent;
@@ -24,10 +20,6 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
