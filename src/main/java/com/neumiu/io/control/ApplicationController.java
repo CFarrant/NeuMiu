@@ -33,9 +33,10 @@ public class ApplicationController {
 		}
 	}
 	
-	public void loadApplicationData() throws ClassNotFoundException, IOException {
+	public ApplicationData loadApplicationData() throws ClassNotFoundException, IOException {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
 			this.appData = (ApplicationData)in.readObject();
 		}
+		return appData;
 	}
 }

@@ -9,11 +9,8 @@ public class PlaylistController extends ArrayList<Playlist> {
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Playlist> listsOfPlaylists;
-	private final String savePath = "//Playlists//";
 
-	public PlaylistController() {
-
-	}
+	public PlaylistController() {}
 
 	public ArrayList<Playlist> getListsOfPlaylists() {
 		return listsOfPlaylists;
@@ -27,16 +24,15 @@ public class PlaylistController extends ArrayList<Playlist> {
 
 	}
 	
-	public void removePlaylist(String name) {
+	public void addPlaylist() {
 
 	}
 	
-	public void savePlaylist(Playlist p) {
-		String fileName = p.getListName() + ".playlist";
-		System.out.println(savePath+fileName);
+	public void editPlaylist() {
+
 	}
 	
-	public void loadPlaylist() {
-		
+	public void removePlaylist() {
+
 	}
 }
