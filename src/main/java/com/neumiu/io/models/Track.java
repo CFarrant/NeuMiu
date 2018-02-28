@@ -3,9 +3,11 @@ package com.neumiu.io.models;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 
 public class Track {
@@ -14,13 +16,13 @@ public class Track {
 	private String genre;
 	private String artist;
 	private String totalTime;
-	private File song;
-	private File artwork;
-	private final File noArtwork = new File(getClass().getClassLoader().getResource("images/NoArtwork.png").getFile());
+	private String songPath;
+	private String artPath;
+	private final String noArtwork = "images/NoArtwork.png";
 
 	public Track() {}
 
-	public Track(String t, String g, String artist, File song, File art) throws IOException, UnsupportedAudioFileException {
+	public Track(String t, String g, String artist, String song, String art) throws UnsupportedAudioFileException, IOException {
 		this.setTitle(t);
 		this.setGenre(g);
 		this.setArtist(artist);
@@ -30,20 +32,21 @@ public class Track {
 	}
 	
 	private String calcTotalTime() throws UnsupportedAudioFileException, IOException {
-		String totalRunTime = null;
-		AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(this.song);
-		if (fileFormat instanceof TAudioFileFormat) {
-			Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
-		    String key = "duration";
-		    Long microseconds = (Long) properties.get(key);
-		    int mili = (int) (microseconds / 1000);
-		    int sec = (mili / 1000) % 60;
-		    int min = (mili / 1000) / 60;
-		    totalRunTime = ("Runtime: " + min + ":" + sec);
-		} else {
-		    throw new UnsupportedAudioFileException();
-		}
-		return totalRunTime;
+		String time = null;
+		File file = new File(getSongPath());
+		AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(file);
+	    if (fileFormat instanceof TAudioFileFormat) {
+	        Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
+	        String key = "duration";
+	        Long microseconds = (Long) properties.get(key);
+	        int mili = (int) (microseconds / 1000);
+	        int sec = (mili / 1000) % 60;
+	        int min = (mili / 1000) / 60;
+	        time = min + ":" + sec;
+	    } else {
+	        throw new UnsupportedAudioFileException();
+	    }
+		return time;
 	}
 
 	public String getTitle() {
@@ -79,26 +82,26 @@ public class Track {
 		this.artist = artist;
 	}
 
-	public File getSongPath() {
-		return song;
+	public String getSongPath() {
+		return songPath;
 	}
 
-	public void setSongPath(File song) throws IOException {
-		if (song == null) {
-			throw new IOException("File was unable to be found!");
+	public void setSongPath(String song) {
+		if (song == null || song.isEmpty()) {
+			throw new IllegalArgumentException("songPath cannot be NULL/Empty");
 		}
-		this.song = song;
+		this.songPath = song;
 	}
 
-	public File getArtwork() {
-		return artwork;
+	public String getArtwork() {
+		return artPath;
 	}
 
-	public void setArtwork(File art) {
-		if (art == null) {
-			this.artwork = noArtwork;
+	public void setArtwork(String art) {
+		if (art == null || art.isEmpty()) {
+			this.artPath = noArtwork;
 		}
-		this.artwork = art;
+		this.artPath = art;
 	}
 
 	public String getTotalTime() {
