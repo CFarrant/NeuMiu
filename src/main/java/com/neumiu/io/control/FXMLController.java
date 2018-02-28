@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -21,6 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -98,6 +100,14 @@ public class FXMLController {
 
 	private boolean mute;
 	private VolumeLevel volume = VolumeLevel.MEDIUM;
+	
+	private void showAlert(String title, String header, String text) {
+		 Alert alert = new Alert(AlertType.INFORMATION);
+		 alert.setTitle(title);
+		 alert.setHeaderText(header);
+		 alert.setContentText(text);
+		 alert.showAndWait();
+	 }
 
 	public FXMLController() {
 
@@ -187,5 +197,4 @@ public class FXMLController {
 	public void updateTotalTime(String fullTime) {
 		totalTime.setText(fullTime);
 	}
-
 }
