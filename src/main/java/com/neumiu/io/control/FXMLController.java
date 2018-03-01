@@ -127,6 +127,15 @@ public class FXMLController {
 	}
 
 	
+	public void editSong(ActionEvent q) throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/EditSong.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Edit Song");
+		stage.show();
+	}
+	
 	private void showAlert(String title, String header, String text, AlertType type) {
 		 Alert alert = new Alert(type);
 		 alert.setTitle(title);
