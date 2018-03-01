@@ -39,7 +39,7 @@ fx:controller="com.neumiu.io.control.FXMLController">
                 <Menu mnemonicParsing="false" text="Playlists">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Create Playlist" />
-                        <MenuItem mnemonicParsing="false" text="Edit Playlist" />
+                        <MenuItem mnemonicParsing="false" text="Edit Playlist" onAction="#editPlaylist" />
                         <MenuItem mnemonicParsing="false" text="Remove Playlist" />
                      </items>
                 </Menu>

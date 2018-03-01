@@ -117,6 +117,18 @@ public class FXMLController {
 
 	}
 	
+	
+	@FXML
+	public void editPlaylist() throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/PlaylistWindow.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Edit Playlist");
+		stage.show();
+	}
+	
+	
 	@FXML
 	private Button cancel;
 	
