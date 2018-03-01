@@ -8,9 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
-prefHeight="439.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="com.neumiu.io.control.FXMLController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neumiu.io.control.FXMLController">
    <children>
       <GridPane layoutX="-2.0" layoutY="1.0" prefHeight="384.0" prefWidth="286.0">
         <columnConstraints>
@@ -26,7 +24,7 @@ fx:controller="com.neumiu.io.control.FXMLController">
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TextField layoutX="116.0" layoutY="38.0" />
-                  <Label layoutX="22.0" layoutY="42.0" prefHeight="17.0" prefWidth="91.0" text="Edit Song Name" textAlignment="CENTER" textFill="#1a3fd9" />
+                  <Label layoutX="22.0" layoutY="42.0" prefHeight="17.0" prefWidth="91.0" text="Edit Song Name" textAlignment="CENTER" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -43,8 +41,8 @@ fx:controller="com.neumiu.io.control.FXMLController">
             </AnchorPane>
             <AnchorPane prefHeight="120.0" prefWidth="286.0" GridPane.rowIndex="3">
                <children>
-                  <Label layoutX="34.0" layoutY="42.0" text="Label" />
-                  <TextField layoutX="115.0" layoutY="38.0" />
+                  <Label layoutX="26.0" layoutY="40.0" prefHeight="17.0" prefWidth="74.0" text="Edit Song Art" />
+                  <Button layoutX="143.0" layoutY="36.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Browse" />
                </children>
             </AnchorPane>
          </children>

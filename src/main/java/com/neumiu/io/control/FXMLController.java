@@ -96,7 +96,7 @@ public class FXMLController {
 	private Canvas mainCanvas;
 	
 	@FXML
-	private TextFlow tofl;
+	private TextFlow tofl = new TextFlow();
 
 	@FXML
 	public void helpScreen(ActionEvent f) throws IOException {
@@ -113,7 +113,6 @@ public class FXMLController {
 		t.setTextAlignment(TextAlignment.CENTER);
 		
 		stage.show();
-		tofl = new TextFlow();
 		tofl.getChildren().add(t);
 
 	}
