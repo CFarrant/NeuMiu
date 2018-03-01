@@ -43,6 +43,8 @@ public class FXMLController {
 	private TrackController track;
 	private ApplicationData appData;
 	private String fileName = "NeuMiu.db";
+	private boolean mute;
+	private VolumeLevel volume = VolumeLevel.MEDIUM;
 
 	@FXML
 	private TreeView<?> playlistTree;
@@ -94,7 +96,7 @@ public class FXMLController {
 
 	@FXML
 	private Canvas mainCanvas;
-	
+
 	@FXML
 	private TextFlow tofl = new TextFlow();
 
@@ -108,16 +110,16 @@ public class FXMLController {
 		stage.setTitle("NeuMiu Help");
 
 		Text t = new Text("lol no help for you");
-		t.setFont(Font.font("Verdana", 20));
+		t.setText("How do Use");
+		//t.setFont(Font.font("Verdana", 20));
 		t.setFill(Color.BLUEVIOLET);
 		t.setTextAlignment(TextAlignment.CENTER);
-		
+
 		stage.show();
 		tofl.getChildren().add(t);
 
 	}
-	
-	
+
 	@FXML
 	public void editPlaylist() throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/PlaylistWindow.fxml"));
@@ -127,8 +129,7 @@ public class FXMLController {
 		stage.setTitle("Edit Playlist");
 		stage.show();
 	}
-	
-	
+
 	@FXML
 	public void addSongs(ActionEvent g) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/AddSongs.fxml"));
@@ -138,7 +139,7 @@ public class FXMLController {
 		stage.setTitle("Add Songs to Playlist");
 		stage.show();
 	}
-	
+
 	@FXML
 	public void removeSongs(ActionEvent h) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/RemoveSongs.fxml"));
@@ -148,14 +149,14 @@ public class FXMLController {
 		stage.setTitle("Remove Songs From Playlist");
 		stage.show();
 	}
-	
+
 	@FXML
 	private Button cancel;
-	
+
 	@FXML
 	public void closeButton(ActionEvent h) {
 		Stage stage = (Stage) cancel.getScene().getWindow();
-	    stage.close();
+		stage.close();
 	}
 
 	public void editSong(ActionEvent q) throws IOException {
@@ -166,9 +167,6 @@ public class FXMLController {
 		stage.setTitle("Edit Song");
 		stage.show();
 	}
-
-	private boolean mute;
-	private VolumeLevel volume = VolumeLevel.MEDIUM;
 
 	private void showAlert(String title, String header, String text) {
 		Alert alert = new Alert(AlertType.INFORMATION);
