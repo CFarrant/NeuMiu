@@ -130,6 +130,26 @@ public class FXMLController {
 	
 	
 	@FXML
+	public void addSongs(ActionEvent g) throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/AddSongs.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Add Songs to Playlist");
+		stage.show();
+	}
+	
+	@FXML
+	public void removeSongs(ActionEvent h) throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/RemoveSongs.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Remove Songs From Playlist");
+		stage.show();
+	}
+	
+	@FXML
 	private Button cancel;
 	
 	@FXML
