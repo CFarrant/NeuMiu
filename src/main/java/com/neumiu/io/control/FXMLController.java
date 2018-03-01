@@ -123,7 +123,8 @@ public class FXMLController {
 	
 	@FXML
 	public void closeButton(ActionEvent h) {
-		
+		Stage stage = (Stage) cancel.getScene().getWindow();
+	    stage.close();
 	}
 
 	public void editSong(ActionEvent q) throws IOException {
