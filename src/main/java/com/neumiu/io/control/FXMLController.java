@@ -38,7 +38,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class FXMLController {
-	
+
 	private PlaylistController playlist;
 	private TrackController track;
 	private ApplicationData appData;
@@ -94,6 +94,9 @@ public class FXMLController {
 
 	@FXML
 	private Canvas mainCanvas;
+	
+	@FXML
+	private TextFlow tofl;
 
 	@FXML
 	public void helpScreen(ActionEvent f) throws IOException {
@@ -105,18 +108,35 @@ public class FXMLController {
 		stage.setTitle("NeuMiu Help");
 
 		Text t = new Text("lol no help for you");
-		// t.setText("lol no help for you");
 		t.setFont(Font.font("Verdana", 20));
 		t.setFill(Color.BLUEVIOLET);
 		t.setTextAlignment(TextAlignment.CENTER);
+		
 		stage.show();
-		// showAlert("How to use NueMiu", null, "The Halp");
+		tofl = new TextFlow();
+		tofl.getChildren().add(t);
 
+	}
+	
+	@FXML
+	private Button cancel;
+	
+	@FXML
+	public void closeButton(ActionEvent h) {
+		
+	}
+
+	public void editSong(ActionEvent q) throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/EditSong.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Edit Song");
+		stage.show();
 	}
 
 	private boolean mute;
 	private VolumeLevel volume = VolumeLevel.MEDIUM;
-
 
 	private void showAlert(String title, String header, String text) {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -126,23 +146,13 @@ public class FXMLController {
 		alert.showAndWait();
 	}
 
-	
-	public void editSong(ActionEvent q) throws IOException {
-		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/EditSong.fxml"));
-		Stage stage = new Stage();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Edit Song");
-		stage.show();
-	}
-	
 	private void showAlert(String title, String header, String text, AlertType type) {
-		 Alert alert = new Alert(type);
-		 alert.setTitle(title);
-		 alert.setHeaderText(header);
-		 alert.setContentText(text);
-		 alert.showAndWait();
-	 }
+		Alert alert = new Alert(type);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(text);
+		alert.showAndWait();
+	}
 
 	public FXMLController() {
 		playlist = new PlaylistController();
@@ -210,7 +220,7 @@ public class FXMLController {
 	public void createSong() {
 		appData.getTracks().add(track.addTrack());
 	}
-	
+
 	public void nextSong() {
 
 	}
@@ -248,10 +258,10 @@ public class FXMLController {
 			out.writeObject(this.appData);
 		}
 	}
-	
+
 	public ApplicationData loadApplicationData() throws ClassNotFoundException, IOException {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
-			this.appData = (ApplicationData)in.readObject();
+			this.appData = (ApplicationData) in.readObject();
 		}
 		return appData;
 	}

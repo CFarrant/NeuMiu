@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+prefHeight="439.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="com.neumiu.io.control.FXMLController">
    <children>
       <GridPane layoutX="-2.0" layoutY="1.0" prefHeight="384.0" prefWidth="286.0">
         <columnConstraints>
@@ -35,7 +37,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Label layoutX="28.0" layoutY="42.0" text="Label" />
+                  <Label layoutX="21.0" layoutY="42.0" text="Edit Song Artist" />
                   <TextField layoutX="115.0" layoutY="38.0" />
                </children>
             </AnchorPane>
@@ -47,7 +49,7 @@
             </AnchorPane>
          </children>
       </GridPane>
-      <Button layoutX="104.0" layoutY="398.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Cancel" />
+      <Button fx:id="cancel" layoutX="104.0" layoutY="398.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="25.0" prefWidth="74.0" text="Cancel" />
       <Button layoutX="198.0" layoutY="398.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Save" />
    </children>
 </AnchorPane>
