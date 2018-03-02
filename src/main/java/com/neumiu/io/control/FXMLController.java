@@ -1,15 +1,19 @@
 package com.neumiu.io.control;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Map;
+
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import com.neumiu.io.enums.VolumeLevel;
 import com.neumiu.io.utils.ApplicationData;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,9 +21,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -29,16 +30,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import main.java.goxr3plus.javastreamplayer.stream.StreamPlayer;
+import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
+import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
+import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
 
-public class FXMLController {
+public class FXMLController extends StreamPlayer implements StreamPlayerListener{
 
 	private PlaylistController playlist;
 	private TrackController track;
@@ -54,13 +57,10 @@ public class FXMLController {
 	private ListView<?> songInPlaylist;
 
 	@FXML
-	private Slider volumeSlider;
+	private Slider volumeSlider, seekBar;
 
 	@FXML
-	private CheckBox muteBox;
-
-	@FXML
-	private CheckBox shuffleBox;
+	private CheckBox muteBox, shuffleBox;
 
 	@FXML
 	private ImageView coverArt;
@@ -69,37 +69,16 @@ public class FXMLController {
 	private TextField currentlyPlaying;
 
 	@FXML
-	private Slider seekBar;
+	private Label curTime, totalTime;
 
 	@FXML
-	private Label curTime;
+	private Button prevSong, stopSong, pauseSong, playSong, nextSong;
 
 	@FXML
-	private Label totalTime;
-
-	@FXML
-	private Button prevSong;
-
-	@FXML
-	private Button stopSong;
-
-	@FXML
-	private Button pauseSong;
-
-	@FXML
-	private Button playSong;
-
-	@FXML
-	private Button nextSong;
-
-	@FXML
-	private TextFlow aboutHelp;
+	private TextFlow aboutHelp, tofl;
 
 	@FXML
 	private Canvas mainCanvas;
-
-	@FXML
-	private TextFlow tofl = new TextFlow();
 
 	@FXML
 	public void helpScreen(ActionEvent f) throws IOException {
@@ -117,6 +96,7 @@ public class FXMLController {
 		t.setTextAlignment(TextAlignment.CENTER);
 
 		stage.show();
+		tofl = new TextFlow(t);
 		tofl.getChildren().add(t);
 
 	}
@@ -176,25 +156,10 @@ public class FXMLController {
 		stage.show();
 	}
 
-	private void showAlert(String title, String header, String text) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle(title);
-		alert.setHeaderText(header);
-		alert.setContentText(text);
-		alert.showAndWait();
-	}
-
-	private void showAlert(String title, String header, String text, AlertType type) {
-		Alert alert = new Alert(type);
-		alert.setTitle(title);
-		alert.setHeaderText(header);
-		alert.setContentText(text);
-		alert.showAndWait();
-	}
-
 	public FXMLController() {
 		playlist = new PlaylistController();
 		track = new TrackController();
+		addStreamPlayerListener((StreamPlayerListener) this);
 		try {
 			this.loadApplicationData();
 		} catch (ClassNotFoundException | IOException e) {
@@ -237,20 +202,51 @@ public class FXMLController {
 
 		}
 	}
-
-	public void play() {
+	
+	private void manipulateSeekBar(long totalTime, long currentTime) {
+		seekBar.setMax(totalTime);
+		seekBar.setMin(0);
+		seekBar.setValue(currentTime);
+	}
+	
+	private String time;
+	
+	private String milliToString(long value) {
+		int mili = (int)(value / 1000);
+        int sec = ((mili / 1000) % 60) + 1;
+        int min = (mili / 1000) / 60;
+        String secString = String.format("%02d", sec);
+        time = min + ":" + secString;
+        return time;
+	}
+	
+	private long totalPlayTime = 0;
+	
+	public void playSong() throws StreamPlayerException {
 		playSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				String path = "images/e1m1.jpg";
-				String artist = "Unknown";
-				String title = "Gates to Hell, E1M1";
-				String fullPlayTime = "3:59";
-				String currentTime = "0:00";
-				updateArtwork(path);
-				updatePlaying(artist, title);
-				updateTotalTime(fullPlayTime);
-				updateCurTime(currentTime);
+				try {
+					File song = new File("sample/song/test.flac").getAbsoluteFile();
+					try {
+						totalTime.setText(track.getTotalTime(song));
+					} catch (UnsupportedAudioFileException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						totalPlayTime = track.getTotalTimeMillis(song);
+					} catch (UnsupportedAudioFileException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					open(song);
+					play();
+					
+				} catch (StreamPlayerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
 			}
 		});
 	}
@@ -267,12 +263,17 @@ public class FXMLController {
 
 	}
 
-	public void pause() {
+	public void pauseSong() {
 
 	}
 
-	public void stop() {
-
+	public void stopSong() {
+		playSong.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				stop();
+			}
+		});
 	}
 
 	public void updateArtwork(String path) {
@@ -283,8 +284,8 @@ public class FXMLController {
 		currentlyPlaying.setText(artist + " ~ " + title);
 	}
 
-	public void updateCurTime(String currentTime) {
-		curTime.setText(currentTime);
+	public void updateCurTime(String currentPlayTime) {
+		curTime.setText(currentPlayTime);
 	}
 
 	public void updateTotalTime(String fullTime) {
@@ -302,5 +303,29 @@ public class FXMLController {
 			this.appData = (ApplicationData) in.readObject();
 		}
 		return appData;
+	}
+	
+	@Override
+	public void opened(Object arg0, Map<String, Object> arg1) {}
+
+	private long currentPlayTimeMillis;
+	
+	@Override
+	public void progress(int arg0, long arg1, byte[] arg2, Map<String, Object> arg3) {
+		milliToString(arg1);
+		currentPlayTimeMillis = arg1/1000;
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run() {
+				manipulateSeekBar(totalPlayTime, currentPlayTimeMillis);
+				seekBar.setValue(currentPlayTimeMillis);
+				curTime.setText(time);
+			}
+		});
+	}
+
+	@Override
+	public void statusUpdated(StreamPlayerEvent arg0) {
+		System.out.println(arg0.getPlayerStatus());
 	}
 }

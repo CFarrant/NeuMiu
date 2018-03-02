@@ -3,31 +3,23 @@
   	<groupId>edu.neumont.csc150</groupId>
   	<artifactId>neumiu</artifactId>
   	<version>0.0.1-SNAPSHOT</version> 
-  
+  	<repositories>
+		<repository>
+	 		<id>jitpack.io</id>
+	 		<url>https://jitpack.io</url>
+        </repository>
+	</repositories>
 	<dependencies>
-		<dependency>
-			<!-- https://mvnrepository.com/artifact/org.blinkenlights.jid3/JID3 -->
-    		<groupId>org.blinkenlights.jid3</groupId>
-    		<artifactId>JID3</artifactId>
-    		<version>0.46</version>
-		</dependency>
-    	<dependency>
-	    	<!-- https://mvnrepository.com/artifact/org.jcraft/jorbis -->
-        	<groupId>org.jcraft</groupId>
-        	<artifactId>jorbis</artifactId>
-        	<version>0.0.17</version>
-		</dependency>
-		<dependency>
-			<!-- https://mvnrepository.com/artifact/org.jflac/jflac-codec -->
-   			<groupId>org.jflac</groupId>
-    		<artifactId>jflac-codec</artifactId>
-    		<version>1.5.2</version>
-		</dependency>
 		<dependency>
 			<!-- https://mvnrepository.com/artifact/com.googlecode.soundlibs/mp3spi -->
     		<groupId>com.googlecode.soundlibs</groupId>
     		<artifactId>mp3spi</artifactId>
     		<version>1.9.5.4</version>
+		</dependency>
+		<dependency>
+ 			<groupId>com.github.goxr3plus</groupId>
+  		 	<artifactId>java-stream-player</artifactId>
+  		 	<version>V1.1.0</version>
 		</dependency>
 	</dependencies>
 </project>
