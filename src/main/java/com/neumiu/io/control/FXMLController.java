@@ -57,7 +57,7 @@ public class FXMLController {
 	private Slider volumeSlider;
 
 	@FXML
-	private CheckBox muteBox;
+	CheckBox muteBox;
 
 	@FXML
 	private CheckBox shuffleBox;
@@ -111,10 +111,15 @@ public class FXMLController {
 	}
 
 	@FXML
-	public void browse(ActionEvent r) {
+	public void browse(ActionEvent r) throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
-		// fileChooser.showOpenDialog(stage);
+		fileChooser.showOpenDialog(stage);
 	}
 
 	@FXML
@@ -191,42 +196,6 @@ public class FXMLController {
 		}
 	}
 
-	public void run() {
-
-	}
-
-	public boolean isMute() {
-		return mute;
-	}
-
-	public void setMute(boolean mute) {
-		this.mute = mute;
-	}
-
-	public VolumeLevel getVolume() {
-		return volume;
-	}
-
-	public void setVolume(VolumeLevel volume) {
-		this.volume = volume;
-	}
-
-	public void shuffel() {
-
-	}
-
-	public int volume(int vol) {
-		return vol;
-	}
-
-	public void mute(boolean mute) {
-		if (mute == true) {
-
-		} else {
-
-		}
-	}
-
 	public void play() {
 		playSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -291,5 +260,37 @@ public class FXMLController {
 			this.appData = (ApplicationData) in.readObject();
 		}
 		return appData;
+	}
+
+	public boolean isMute() {
+		return mute;
+	}
+
+	public void setMute(boolean mute) {
+		this.mute = mute;
+	}
+
+	public VolumeLevel getVolume() {
+		return volume;
+	}
+
+	public void setVolume(VolumeLevel volume) {
+		this.volume = volume;
+	}
+
+	public void shuffel() {
+
+	}
+
+	public int volume(int vol) {
+		return vol;
+	}
+
+	public void mute(boolean mute) {
+		if (mute == true) {
+
+		} else {
+
+		}
 	}
 }
