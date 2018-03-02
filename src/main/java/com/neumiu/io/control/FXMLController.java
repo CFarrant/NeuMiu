@@ -99,9 +99,6 @@ public class FXMLController {
 	private Canvas mainCanvas;
 
 	@FXML
-	private TextFlow tofl = new TextFlow();
-
-	@FXML
 	public void helpScreen(ActionEvent f) throws IOException {
 
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
@@ -109,23 +106,15 @@ public class FXMLController {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("NeuMiu Help");
-
-		Text t = new Text("lol no help for you");
-		t.setText("How do Use");
-		// t.setFont(Font.font("Verdana", 20));
-		t.setFill(Color.BLUEVIOLET);
-		t.setTextAlignment(TextAlignment.CENTER);
-
 		stage.show();
-		tofl.getChildren().add(t);
 
 	}
-	
+
 	@FXML
 	public void browse(ActionEvent r) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
-		//fileChooser.showOpenDialog(stage);
+		// fileChooser.showOpenDialog(stage);
 	}
 
 	@FXML

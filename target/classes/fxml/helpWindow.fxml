@@ -17,7 +17,23 @@
             <Label layoutX="47.0" layoutY="66.0" prefHeight="52.0" prefWidth="164.0" text="How to play a song - hit Play" />
             <Label layoutX="333.0" layoutY="83.0" prefHeight="17.0" prefWidth="182.0" text="How to Pause a song - hit Pause" />
             <Label layoutX="47.0" layoutY="118.0" prefHeight="17.0" prefWidth="164.0" text="How to Make a Playlist" />
-            <Label layoutX="333.0" layoutY="127.0" prefHeight="17.0" prefWidth="133.0" text="How to edit a Playlist" />
+            <Label layoutX="42.0" layoutY="255.0" prefHeight="17.0" prefWidth="133.0" text="How to edit a Playlist" />
+            <Label layoutX="64.0" layoutY="177.0" prefHeight="17.0" prefWidth="123.0" text="Hit: Create Playlist" />
+            <Label layoutX="70.0" layoutY="207.0" prefHeight="17.0" prefWidth="65.0" text="Add Songs" />
+            <Label layoutX="53.0" layoutY="285.0" prefHeight="17.0" prefWidth="112.0" text="Go to Playlists tab" />
+            <Label layoutX="51.0" layoutY="315.0" text="Hit: Edit Playlists" />
+            <Label layoutX="53.0" layoutY="346.0" text="Hit Save" />
+            <Label layoutX="61.0" layoutY="144.0" text="Go to Playlists tab" />
+            <Label layoutX="333.0" layoutY="118.0" text="How to Edit Song info" />
+            <Label layoutX="355.0" layoutY="153.0" text="Go to Songs tab" />
+            <Label layoutX="359.0" layoutY="186.0" text="Hit: Edit Songs" />
+            <Label layoutX="369.0" layoutY="216.0" text="Hit Save" />
+            <Label layoutX="327.0" layoutY="255.0" text="How to Add a Song" />
+            <Label layoutX="365.0" layoutY="285.0" text="DIE">
+               <font>
+                  <Font name="Chiller" size="40.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
