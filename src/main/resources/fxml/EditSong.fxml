@@ -42,7 +42,7 @@
             <AnchorPane prefHeight="120.0" prefWidth="286.0" GridPane.rowIndex="3">
                <children>
                   <Label layoutX="26.0" layoutY="40.0" prefHeight="17.0" prefWidth="74.0" text="Edit Song Art" />
-                  <Button layoutX="143.0" layoutY="36.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Browse" />
+                  <Button layoutX="143.0" layoutY="36.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Browse" onAction="#browse"/>
                </children>
             </AnchorPane>
          </children>

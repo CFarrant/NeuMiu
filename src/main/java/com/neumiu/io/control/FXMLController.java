@@ -35,6 +35,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class FXMLController {
@@ -111,13 +112,20 @@ public class FXMLController {
 
 		Text t = new Text("lol no help for you");
 		t.setText("How do Use");
-		//t.setFont(Font.font("Verdana", 20));
+		// t.setFont(Font.font("Verdana", 20));
 		t.setFill(Color.BLUEVIOLET);
 		t.setTextAlignment(TextAlignment.CENTER);
 
 		stage.show();
 		tofl.getChildren().add(t);
 
+	}
+	
+	@FXML
+	public void browse(ActionEvent r) {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		//fileChooser.showOpenDialog(stage);
 	}
 
 	@FXML
