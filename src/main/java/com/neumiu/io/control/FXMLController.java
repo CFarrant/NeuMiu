@@ -31,6 +31,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.java.goxr3plus.javastreamplayer.stream.Status;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayer;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
@@ -214,11 +215,8 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	
 	private void milliToString(long value) {
 		int mili = (int)(value / 1000);
-		System.out.println("Time(ms): "+mili);
-        int sec = ((mili / 1000) % 60) + 1;
-        System.out.println("Time(sec) :"+sec);
+        int sec = (mili / 1000) % 60;
         int min = (mili / 1000) / 60;
-        System.out.println("Time(min) :"+min);
         String secString = String.format("%02d", sec);
         time = min + ":" + secString;
         curTime.setText(time);
@@ -228,6 +226,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 
 	public void playSong(ActionEvent pla) {
 		if (this.getStatus() != Status.PLAYING && this.getStatus() != Status.PAUSED) {
+			resetPlayer();
 			try {
 				File song = new File("sample/song/test.flac").getAbsoluteFile();
 				try {
@@ -276,12 +275,9 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 //		}
 //	}
 
-	public void stopSong(ActionEvent sto) {
+	public void stopSong(ActionEvent sto) throws InterruptedException {
 		if (this.getStatus() == Status.PAUSED || this.getStatus() == Status.PLAYING) {
 			stop();
-		}
-		if (this.getStatus() == Status.STOPPED) {
-			resetPlayer();
 		}
 	}
 
@@ -334,7 +330,6 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 			@Override
 			public void run() {
 				milliToString(temp);
-				System.out.println(curTime.getText());
 				manipulateSeekBar(totalPlayTime, currentPlayTimeMillis);
 			}
 		});
@@ -343,5 +338,10 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	@Override
 	public void statusUpdated(StreamPlayerEvent arg0) {
 		System.out.println(arg0.getPlayerStatus());
+	}
+
+	public void exit(WindowEvent event) {
+		stop();
+		System.exit(0);
 	}
 }
