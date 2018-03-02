@@ -167,13 +167,9 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Add Song");
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"),
-				new FileChooser.ExtensionFilter("OGG", "*.ogg"),
+				new FileChooser.ExtensionFilter("OGG", "*.ogg"), new FileChooser.ExtensionFilter("WAV", "*.wav"),
 				new FileChooser.ExtensionFilter("FLAC", "*.flac"));
 		fileChooser.showOpenDialog(stage);
-	}
-
-	public void run() {
-
 	}
 
 	public boolean isMute() {
