@@ -15,7 +15,6 @@ import com.neumiu.io.utils.ApplicationData;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,10 +29,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.java.goxr3plus.javastreamplayer.stream.Status;
@@ -42,7 +37,7 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
 
-public class FXMLController extends StreamPlayer implements StreamPlayerListener{
+public class FXMLController extends StreamPlayer implements StreamPlayerListener {
 
 	private PlaylistController playlist;
 	private TrackController track;
@@ -95,9 +90,11 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		
+
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Resource File");
+		fileChooser.setTitle("Change Cover Art");
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+				new FileChooser.ExtensionFilter("PNG", "*.png"));
 		fileChooser.showOpenDialog(stage);
 	}
 
@@ -160,8 +157,19 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		}
 	}
 
-	public void run() {
+	@FXML
+	public void addSong(ActionEvent k) throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
 
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Add Song");
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"),
+				new FileChooser.ExtensionFilter("OGG", "*.ogg"), new FileChooser.ExtensionFilter("WAV", "*.wav"),
+				new FileChooser.ExtensionFilter("FLAC", "*.flac"));
+		fileChooser.showOpenDialog(stage);
 	}
 
 	public boolean isMute() {
@@ -195,7 +203,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 
 		}
 	}
-	
+
 	private void manipulateSeekBar(long totalTime, long currentTime) {
 		seekBar.setMax(totalTime);
 		seekBar.setMin(0);
@@ -215,7 +223,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
         time = min + ":" + secString;
         curTime.setText(time);
 	}
-	
+
 	private long totalPlayTime = 0;
 
 	public void playSong(ActionEvent pla) {
@@ -237,7 +245,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 				
 			} catch (StreamPlayerException e) {
 				e.printStackTrace();
-			}				
+			}
 		}
 		else if (this.getStatus() == Status.PLAYING) {
 			pause();
@@ -311,12 +319,13 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		}
 		return appData;
 	}
-	
+
 	@Override
-	public void opened(Object arg0, Map<String, Object> arg1) {}
+	public void opened(Object arg0, Map<String, Object> arg1) {
+	}
 
 	private long currentPlayTimeMillis;
-	
+
 	@Override
 	public void progress( int arg0, long arg1, byte[] arg2, Map<String, Object> arg3) {
 		final long temp = arg1;
