@@ -30,10 +30,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayer;
@@ -41,7 +37,7 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
 
-public class FXMLController extends StreamPlayer implements StreamPlayerListener{
+public class FXMLController extends StreamPlayer implements StreamPlayerListener {
 
 	private PlaylistController playlist;
 	private TrackController track;
@@ -94,7 +90,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		
+
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
 		fileChooser.showOpenDialog(stage);
@@ -194,26 +190,26 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 
 		}
 	}
-	
+
 	private void manipulateSeekBar(long totalTime, long currentTime) {
 		seekBar.setMax(totalTime);
 		seekBar.setMin(0);
 		seekBar.setValue(currentTime);
 	}
-	
+
 	private String time;
-	
+
 	private String milliToString(long value) {
-		int mili = (int)(value / 1000);
-        int sec = ((mili / 1000) % 60) + 1;
-        int min = (mili / 1000) / 60;
-        String secString = String.format("%02d", sec);
-        time = min + ":" + secString;
-        return time;
+		int mili = (int) (value / 1000);
+		int sec = ((mili / 1000) % 60) + 1;
+		int min = (mili / 1000) / 60;
+		String secString = String.format("%02d", sec);
+		time = min + ":" + secString;
+		return time;
 	}
-	
+
 	private long totalPlayTime = 0;
-	
+
 	public void playSong() throws StreamPlayerException {
 	}
 
@@ -226,22 +222,19 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 					try {
 						totalTime.setText(track.getTotalTime(song));
 					} catch (UnsupportedAudioFileException | IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					try {
 						totalPlayTime = track.getTotalTimeMillis(song);
 					} catch (UnsupportedAudioFileException | IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					open(song);
 					play();
-					
+
 				} catch (StreamPlayerException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}				
+				}
 			}
 		});
 	}
@@ -299,17 +292,18 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		}
 		return appData;
 	}
-	
+
 	@Override
-	public void opened(Object arg0, Map<String, Object> arg1) {}
+	public void opened(Object arg0, Map<String, Object> arg1) {
+	}
 
 	private long currentPlayTimeMillis;
-	
+
 	@Override
 	public void progress(int arg0, long arg1, byte[] arg2, Map<String, Object> arg3) {
 		milliToString(arg1);
-		currentPlayTimeMillis = arg1/1000;
-		Platform.runLater(new Runnable(){
+		currentPlayTimeMillis = arg1 / 1000;
+		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				manipulateSeekBar(totalPlayTime, currentPlayTimeMillis);
