@@ -5,38 +5,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0"
-	prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1">
-	<children>
-		<Pane prefHeight="413.0" prefWidth="600.0">
-			<children>
-				<Label layoutX="75.0" layoutY="14.0" prefHeight="38.0"
-					prefWidth="451.0" text="Help Window - How to Use NeuMiu"
-					textAlignment="CENTER">
-					<font>
-						<Font name="Comic Sans MS" size="27.0" />
-					</font>
-				</Label>
-				<Label layoutX="47.0" layoutY="66.0" prefHeight="52.0"
-					prefWidth="164.0" text="How to play a song - hit Play" />
-				<Label layoutX="333.0" layoutY="83.0" prefHeight="17.0"
-					prefWidth="182.0" text="How to Pause a song - hit Pause" />
-				<Label layoutX="47.0" layoutY="118.0" prefHeight="17.0"
-					prefWidth="164.0" text="How to Make a Playlist" />
-				<Label layoutX="333.0" layoutY="127.0" prefHeight="17.0"
-					prefWidth="133.0" text="How to edit a Playlist" />
-			</children>
-		</Pane>
-	</children>
-
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-
 	<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
 		minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0"
 		prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1">
