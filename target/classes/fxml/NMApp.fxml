@@ -135,7 +135,7 @@ fx:controller="com.neumiu.io.control.FXMLController">
                                     </Slider>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label fx:id="curTime" text="test">
+                                          <Label fx:id="curTime">
                                              <font>
                                                 <Font name="Copperplate Gothic Bold" size="12.0" />
                                              </font>
@@ -158,7 +158,7 @@ fx:controller="com.neumiu.io.control.FXMLController">
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button fx:id="prevSong" mnemonicParsing="false" text="Previous Song">
+                                          <Button fx:id="prevSong" onAction="#prevSong" mnemonicParsing="false" text="Previous Song">
                                              <HBox.margin>
                                                 <Insets left="100.0" right="15.0" />
                                              </HBox.margin>
@@ -167,14 +167,6 @@ fx:controller="com.neumiu.io.control.FXMLController">
                                              </font>
                                           </Button>
                                           <Button fx:id="stopSong" onAction="#stopSong" mnemonicParsing="false" text="Stop">
-                                             <font>
-                                                <Font name="Copperplate Gothic Light" size="12.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets right="15.0" />
-                                             </HBox.margin>
-                                          </Button>
-                                          <Button fx:id="pauseSong" mnemonicParsing="false" text="Pause">
                                              <font>
                                                 <Font name="Copperplate Gothic Light" size="12.0" />
                                              </font>

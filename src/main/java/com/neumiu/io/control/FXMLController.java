@@ -36,6 +36,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import main.java.goxr3plus.javastreamplayer.stream.Status;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayer;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
@@ -201,74 +202,85 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		seekBar.setValue(currentTime);
 	}
 	
-	private String time;
+	private String time = null;
 	
-	private String milliToString(long value) {
+	private void milliToString(long value) {
 		int mili = (int)(value / 1000);
+		System.out.println("Time(ms): "+mili);
         int sec = ((mili / 1000) % 60) + 1;
+        System.out.println("Time(sec) :"+sec);
         int min = (mili / 1000) / 60;
+        System.out.println("Time(min) :"+min);
         String secString = String.format("%02d", sec);
         time = min + ":" + secString;
-        return time;
+        curTime.setText(time);
 	}
 	
 	private long totalPlayTime = 0;
-	
-	public void playSong() throws StreamPlayerException {
-	}
 
-	public void play() {
-		playSong.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
+	public void playSong(ActionEvent pla) {
+		if (this.getStatus() != Status.PLAYING && this.getStatus() != Status.PAUSED) {
+			try {
+				File song = new File("sample/song/test.flac").getAbsoluteFile();
 				try {
-					File song = new File("sample/song/test.flac").getAbsoluteFile();
-					try {
-						totalTime.setText(track.getTotalTime(song));
-					} catch (UnsupportedAudioFileException | IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					try {
-						totalPlayTime = track.getTotalTimeMillis(song);
-					} catch (UnsupportedAudioFileException | IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					open(song);
-					play();
-					
-				} catch (StreamPlayerException e) {
-					// TODO Auto-generated catch block
+					totalTime.setText(track.getTotalTime(song));
+				} catch (UnsupportedAudioFileException | IOException e) {
 					e.printStackTrace();
-				}				
-			}
-		});
+				}
+				try {
+					totalPlayTime = track.getTotalTimeMillis(song);
+				} catch (UnsupportedAudioFileException | IOException e) {
+					e.printStackTrace();
+				}
+				open(song);
+				play();
+				
+			} catch (StreamPlayerException e) {
+				e.printStackTrace();
+			}				
+		}
+		else if (this.getStatus() == Status.PLAYING) {
+			pause();
+		}
+		else if (this.getStatus() == Status.PAUSED) {
+			resume();
+		}
 	}
 
 	public void createSong() {
 		appData.getTracks().add(track.addTrack());
 	}
 
-	public void nextSong() {
+	public void nextSong(ActionEvent next) {
 
 	}
 
-	public void prevSong() {
+	public void prevSong(ActionEvent prev) {
+		
+	}
+    
+//	public void pauseSong(ActionEvent pau) throws InterruptedException {
+//		if (this.getStatus() == Status.PLAYING) {
+//			pause();
+//		}
+//		else if (this.getStatus() == Status.PAUSED) {
+//			resume();
+//		}
+//	}
 
+	public void stopSong(ActionEvent sto) {
+		if (this.getStatus() == Status.PAUSED || this.getStatus() == Status.PLAYING) {
+			stop();
+		}
+		if (this.getStatus() == Status.STOPPED) {
+			resetPlayer();
+		}
 	}
 
-	public void pauseSong() {
-
-	}
-
-	public void stopSong() {
-		playSong.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-				stop();
-			}
-		});
+	private void resetPlayer() {
+		manipulateSeekBar(100, 0);
+		curTime.setText("0:00");
+		totalTime.setText("0:00");
 	}
 
 	public void updateArtwork(String path) {
@@ -306,15 +318,15 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	private long currentPlayTimeMillis;
 	
 	@Override
-	public void progress(int arg0, long arg1, byte[] arg2, Map<String, Object> arg3) {
-		milliToString(arg1);
+	public void progress( int arg0, long arg1, byte[] arg2, Map<String, Object> arg3) {
+		final long temp = arg1;
 		currentPlayTimeMillis = arg1/1000;
 		Platform.runLater(new Runnable(){
 			@Override
 			public void run() {
+				milliToString(temp);
+				System.out.println(curTime.getText());
 				manipulateSeekBar(totalPlayTime, currentPlayTimeMillis);
-				seekBar.setValue(currentPlayTimeMillis);
-				curTime.setText(time);
 			}
 		});
 	}
