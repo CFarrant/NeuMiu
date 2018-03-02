@@ -92,7 +92,9 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		stage.setScene(scene);
 
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Resource File");
+		fileChooser.setTitle("Change Cover Art");
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+				new FileChooser.ExtensionFilter("PNG", "*.png"));
 		fileChooser.showOpenDialog(stage);
 	}
 
@@ -153,6 +155,21 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		} catch (ClassNotFoundException | IOException e) {
 			appData = new ApplicationData();
 		}
+	}
+
+	@FXML
+	public void addSong(ActionEvent k) throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Add Song");
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"),
+				new FileChooser.ExtensionFilter("OGG", "*.ogg"),
+				new FileChooser.ExtensionFilter("FLAC", "*.flac"));
+		fileChooser.showOpenDialog(stage);
 	}
 
 	public void run() {
