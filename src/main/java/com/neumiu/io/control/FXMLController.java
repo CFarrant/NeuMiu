@@ -57,7 +57,14 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	private ListView<?> songInPlaylist;
 
 	@FXML
+<<<<<<< HEAD
 	private Slider volumeSlider, seekBar;
+=======
+	private Slider volumeSlider;
+
+	@FXML
+	CheckBox muteBox;
+>>>>>>> 58f345379ab38f239e58628b7dbf46d318052388
 
 	@FXML
 	private CheckBox muteBox, shuffleBox;
@@ -88,24 +95,25 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("NeuMiu Help");
-
-		Text t = new Text("lol no help for you");
-		t.setText("How do Use");
-		// t.setFont(Font.font("Verdana", 20));
-		t.setFill(Color.BLUEVIOLET);
-		t.setTextAlignment(TextAlignment.CENTER);
-
 		stage.show();
+<<<<<<< HEAD
 		tofl = new TextFlow(t);
 		tofl.getChildren().add(t);
+=======
+>>>>>>> 58f345379ab38f239e58628b7dbf46d318052388
 
 	}
-	
+
 	@FXML
-	public void browse(ActionEvent r) {
+	public void browse(ActionEvent r) throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
-		//fileChooser.showOpenDialog(stage);
+		fileChooser.showOpenDialog(stage);
 	}
 
 	@FXML
@@ -167,6 +175,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		}
 	}
 
+<<<<<<< HEAD
 	public void run() {
 
 	}
@@ -223,6 +232,9 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	private long totalPlayTime = 0;
 	
 	public void playSong() throws StreamPlayerException {
+=======
+	public void play() {
+>>>>>>> 58f345379ab38f239e58628b7dbf46d318052388
 		playSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -304,6 +316,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		}
 		return appData;
 	}
+<<<<<<< HEAD
 	
 	@Override
 	public void opened(Object arg0, Map<String, Object> arg1) {}
@@ -327,5 +340,38 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	@Override
 	public void statusUpdated(StreamPlayerEvent arg0) {
 		System.out.println(arg0.getPlayerStatus());
+=======
+
+	public boolean isMute() {
+		return mute;
+	}
+
+	public void setMute(boolean mute) {
+		this.mute = mute;
+	}
+
+	public VolumeLevel getVolume() {
+		return volume;
+	}
+
+	public void setVolume(VolumeLevel volume) {
+		this.volume = volume;
+	}
+
+	public void shuffel() {
+
+	}
+
+	public int volume(int vol) {
+		return vol;
+	}
+
+	public void mute(boolean mute) {
+		if (mute == true) {
+
+		} else {
+
+		}
+>>>>>>> 58f345379ab38f239e58628b7dbf46d318052388
 	}
 }
