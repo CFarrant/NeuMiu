@@ -159,7 +159,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 
 	@FXML
 	public void addSong(ActionEvent k) throws IOException {
-		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/EditSong.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
