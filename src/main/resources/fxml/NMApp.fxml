@@ -12,15 +12,15 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.image.Image?>
 
-<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neumiu.io.control.FXMLController">
+<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neumiu.io.control.FXMLController">
    <children>
       <VBox>
          <children>
@@ -28,15 +28,15 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Songs">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Add Song" />
-                    <MenuItem mnemonicParsing="false" text="Edit Song"  onAction="#editSong"/>
+                    <MenuItem mnemonicParsing="false" onAction="#addSong" text="Add Song" />
+                    <MenuItem mnemonicParsing="false" onAction="#editSong" text="Edit Song" />
                     <MenuItem mnemonicParsing="false" text="Remove Song" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Playlists">
                    <items>
                       <MenuItem mnemonicParsing="false" text="Create Playlist" />
-                      <MenuItem mnemonicParsing="false" text="Edit Playlist" onAction="#editPlaylist" />
+                      <MenuItem mnemonicParsing="false" onAction="#editPlaylist" text="Edit Playlist" />
                       <MenuItem mnemonicParsing="false" text="Remove Playlist" />
                    </items>
                 </Menu>
@@ -61,7 +61,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" onAction="#helpScreen"/>
+                    <MenuItem mnemonicParsing="false" onAction="#helpScreen" text="About" />
                   </items>
                 </Menu>
               </menus>
@@ -155,7 +155,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                   <children>
-                                    <Button fx:id="prevSong" onAction="#prevSong" mnemonicParsing="false" text="Previous Song">
+                                    <Button fx:id="prevSong" mnemonicParsing="false" onAction="#prevSong" text="Previous Song">
                                       <HBox.margin>
                                         <Insets left="100.0" right="15.0" />
                                       </HBox.margin>
@@ -163,7 +163,7 @@
                                          <Font name="Copperplate Gothic Light" size="12.0" />
                                       </font>
                                     </Button>
-                                    <Button fx:id="stopSong" onAction="#stopSong" mnemonicParsing="false" text="Stop">
+                                    <Button fx:id="stopSong" mnemonicParsing="false" onAction="#stopSong" text="Stop">
                                       <font>
                                         <Font name="Copperplate Gothic Light" size="12.0" />
                                       </font>
@@ -171,7 +171,7 @@
                                         <Insets right="15.0" />
                                       </HBox.margin>
                                     </Button>
-                                    <Button fx:id="playSong" onAction="#playSong" mnemonicParsing="false" text="Play">
+                                    <Button fx:id="playSong" mnemonicParsing="false" onAction="#playSong" text="Play">
                                       <font>
                                          <Font name="Copperplate Gothic Light" size="12.0" />
                                       </font>
