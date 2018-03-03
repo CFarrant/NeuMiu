@@ -20,9 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-	minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.131"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neumiu.io.control.FXMLController">
+<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neumiu.io.control.FXMLController">
 	<children>
 		<VBox>
 			<children>
@@ -30,18 +28,15 @@
 					<menus>
 						<Menu mnemonicParsing="false" text="Songs">
 							<items>
-								<MenuItem mnemonicParsing="false" onAction="#addSong"
-									text="Add Song" />
-								<MenuItem mnemonicParsing="false" onAction="#editSong"
-									text="Edit Song" />
+								<MenuItem mnemonicParsing="false" onAction="#addSong" text="Add Song" />
+								<MenuItem mnemonicParsing="false" onAction="#editSong" text="Edit Song" />
 								<MenuItem mnemonicParsing="false" text="Remove Song" />
 							</items>
 						</Menu>
 						<Menu mnemonicParsing="false" text="Playlists">
 							<items>
 								<MenuItem mnemonicParsing="false" text="Create Playlist" />
-								<MenuItem mnemonicParsing="false" onAction="#editPlaylist"
-									text="Edit Playlist" />
+								<MenuItem mnemonicParsing="false" onAction="#editPlaylist" text="Edit Playlist" />
 								<MenuItem mnemonicParsing="false" text="Remove Playlist" />
 							</items>
 						</Menu>
@@ -66,14 +61,12 @@
 						</Menu>
 						<Menu mnemonicParsing="false" text="Help">
 							<items>
-								<MenuItem mnemonicParsing="false" onAction="#helpScreen"
-									text="About" />
+								<MenuItem mnemonicParsing="false" onAction="#helpScreen" text="About" />
 							</items>
 						</Menu>
 					</menus>
 				</MenuBar>
-				<SplitPane dividerPositions="0.5" orientation="VERTICAL"
-					prefHeight="200.0" prefWidth="160.0">
+				<SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
 					<items>
 						<HBox>
 							<children>
@@ -102,8 +95,7 @@
 																<Font name="Copperplate Gothic Bold" size="12.0" />
 															</font>
 														</Label>
-														<ListView fx:id="songInPlaylist" prefHeight="387.0"
-															prefWidth="600.0" />
+														<ListView fx:id="songInPlaylist" prefHeight="387.0" prefWidth="600.0" />
 													</children>
 												</VBox>
 											</children>
@@ -116,8 +108,7 @@
 							<children>
 								<SplitPane dividerPositions="0.5">
 									<items>
-										<ImageView fx:id="coverArt" fitHeight="200.0"
-											fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+										<ImageView fx:id="coverArt" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
 											<image>
 												<Image url="images/NoArtwork.png" />
 											</image>
@@ -164,8 +155,7 @@
 												</HBox>
 												<HBox prefHeight="100.0" prefWidth="200.0">
 													<children>
-														<Button fx:id="prevSong" mnemonicParsing="false"
-															onAction="#prevSong" text="Previous Song">
+														<Button fx:id="prevSong" mnemonicParsing="false" onAction="#prevSong" text="Previous Song">
 															<HBox.margin>
 																<Insets left="100.0" right="15.0" />
 															</HBox.margin>
@@ -173,8 +163,7 @@
 																<Font name="Copperplate Gothic Light" size="12.0" />
 															</font>
 														</Button>
-														<Button fx:id="stopSong" mnemonicParsing="false"
-															onAction="#stopSong" text="Stop">
+														<Button fx:id="stopSong" mnemonicParsing="false" onAction="#stopSong" text="Stop">
 															<font>
 																<Font name="Copperplate Gothic Light" size="12.0" />
 															</font>
@@ -182,8 +171,7 @@
 																<Insets right="15.0" />
 															</HBox.margin>
 														</Button>
-														<Button fx:id="playSong" mnemonicParsing="false"
-															onAction="#playSong" text="Play">
+														<Button fx:id="playSong" mnemonicParsing="false" onAction="#playSong" prefHeight="22.0" prefWidth="22.0">
 															<font>
 																<Font name="Copperplate Gothic Light" size="12.0" />
 															</font>
@@ -191,8 +179,7 @@
 																<Insets right="15.0" />
 															</HBox.margin>
 														</Button>
-														<Button fx:id="nextSong" mnemonicParsing="false"
-															text="Next Song">
+														<Button fx:id="nextSong" mnemonicParsing="false" text="Next Song">
 															<font>
 																<Font name="Copperplate Gothic Light" size="12.0" />
 															</font>
