@@ -228,7 +228,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		if (this.getStatus() != Status.PLAYING && this.getStatus() != Status.PAUSED) {
 			resetPlayer();
 			try {
-				File song = new File("sample/song/test.flac").getAbsoluteFile();
+				File song = new File("sample/song/shadows.flac").getAbsoluteFile();
 				try {
 					totalTime.setText(track.getTotalTime(song));
 				} catch (UnsupportedAudioFileException | IOException e) {
@@ -255,7 +255,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	public void createSong() {
-		appData.getTracks().add(track.addTrack());
+
 	}
 
 	public void nextSong(ActionEvent next) {
@@ -265,15 +265,6 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	public void prevSong(ActionEvent prev) {
 		
 	}
-    
-//	public void pauseSong(ActionEvent pau) throws InterruptedException {
-//		if (this.getStatus() == Status.PLAYING) {
-//			pause();
-//		}
-//		else if (this.getStatus() == Status.PAUSED) {
-//			resume();
-//		}
-//	}
 
 	public void stopSong(ActionEvent sto) throws InterruptedException {
 		if (this.getStatus() == Status.PAUSED || this.getStatus() == Status.PLAYING) {
@@ -340,8 +331,9 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		System.out.println(arg0.getPlayerStatus());
 	}
 
-	public void exit(WindowEvent event) {
+	public void exit(WindowEvent event) throws IOException {
 		stop();
+//		saveApplicationData();
 		System.exit(0);
 	}
 }
