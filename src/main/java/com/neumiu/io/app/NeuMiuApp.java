@@ -10,8 +10,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class NeuMiuApp extends Application{
-	
+public class NeuMiuApp extends Application {
+
 	private FXMLController control = new FXMLController();
 
 	public static void main(String[] args) {
@@ -21,22 +21,22 @@ public class NeuMiuApp extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/NMApp.fxml"));
-		
+
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("NeuMiu");
 		stage.show();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-		    @Override
-		    public void handle(WindowEvent event) {
-		        try {
+			@Override
+			public void handle(WindowEvent event) {
+				try {
 					control.exit(event);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    }
+			}
 		});
+
 	}
 
 }
