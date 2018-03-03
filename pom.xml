@@ -28,6 +28,7 @@
    			<groupId>com.googlecode.soundlibs</groupId>
    			<artifactId>vorbisspi</artifactId>
     		<version>1.0.3.3</version>
+    	</dependency>
 		<!-- Player Base -->
 		<dependency>
  			<groupId>com.github.goxr3plus</groupId>
