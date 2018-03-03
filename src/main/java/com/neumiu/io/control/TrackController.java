@@ -10,8 +10,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import org.tritonus.share.sampled.file.TAudioFileFormat;
-
 import com.neumiu.io.models.Track;
 
 public class TrackController {
@@ -41,7 +39,7 @@ public class TrackController {
 		        String key = "duration";
 		        Long microseconds = (Long) properties.get(key);
 		        int mili = (int) (microseconds / 1000);
-		        int sec = (mili / 1000) % 60 + 1;
+		        int sec = (mili / 1000) % 60;
 		        int min = (mili / 1000) / 60;
 		        String secString = String.format("%02d", sec);
 		        runTime = min + ":" + secString;
@@ -50,18 +48,17 @@ public class TrackController {
 		    }
 		}
 		else if (format.toString().contains("FLAC")) {
-			System.out.println(format.toString());
-			double length = song.length();
-			double sampleRate = format.getSampleRate();
-			double channels = format.getChannels();
-			double audioSampleSize = format.getSampleSizeInBits();
-			System.out.println("Lenght: "+length+", Sample Rate: "+sampleRate+", Channels: "+channels+", Audio Sample Size in Bits: "+audioSampleSize);
-//			double time = length / (sampleRate * channels * (audioSampleSize / 8));
-//			int timeInSec = (int)time;
-//			int sec = timeInSec % 60 + 1;
-//	        int min = timeInSec / 60;
+//			double bps = format.getSampleSizeInBits();
+//			double sr = format.getSampleRate();
+//			double c = format.getChannels();
+//			long fs = song.length();
+//			double duration = (8*(fs)/(bps*sr*c));
+//			System.out.println("TEST VALUE: "+duration);
+//			int sec = (int) (duration % 60);
+//			int min = (int) (duration / 60);
 //	        String secString = String.format("%02d", sec);
 //	        runTime = min + ":" + secString;
+//	        System.out.println("TEST VALUE: "+runTime);
 		}
 		else if (format.toString().contains("VORBIS")) {
 			AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(song);
@@ -70,7 +67,7 @@ public class TrackController {
 		        String key = "duration";
 		        Long microseconds = (Long) properties.get(key);
 		        int mili = (int) (microseconds / 1000);
-		        int sec = (mili / 1000) % 60 + 1;
+		        int sec = (mili / 1000) % 60;
 		        int min = (mili / 1000) / 60;
 		        String secString = String.format("%02d", sec);
 		        runTime = min + ":" + secString;
@@ -86,7 +83,7 @@ public class TrackController {
 			System.out.println("Lenght: "+length+", Sample Rate: "+sampleRate+", Channels: "+channels+", Audio Sample Size in Bits: "+audioSampleSize);
 			double time = length / (sampleRate * channels * (audioSampleSize / 8));
 			int timeInSec = (int)time;
-			int sec = timeInSec % 60 + 1;
+			int sec = timeInSec % 60;
 	        int min = timeInSec / 60;
 	        String secString = String.format("%02d", sec);
 	        runTime = min + ":" + secString;
@@ -110,9 +107,15 @@ public class TrackController {
 		        throw new UnsupportedAudioFileException();
 		    }
 		}
-		else if (format.toString().contains("FLAC")) {
-//			double time = length / (sampleRate * channels * (audioSampleSize / 8));
-//			runTime = (long)(time * 1000);
+		else if (format.toString().contains("FLAC")) {	
+//			double bps = format.getSampleSizeInBits();
+//			double sr = format.getSampleRate();
+//			double c = format.getChannels();
+//			long fs = song.length();
+//			double duration = (8*(fs)/(bps*sr*c));
+//			long mili = (long) (duration * 1000);
+//	        runTime = mili;
+//	        System.out.println("TEST VALUE: "+mili);
 		}
 		else if (format.toString().contains("VORBIS")) {
 			AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(song);
