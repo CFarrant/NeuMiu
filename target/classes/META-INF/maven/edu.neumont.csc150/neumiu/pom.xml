@@ -4,18 +4,32 @@
   	<artifactId>neumiu</artifactId>
   	<version>0.0.1-SNAPSHOT</version> 
   	<repositories>
+  		<!-- Player Base Repository -->
 		<repository>
 	 		<id>jitpack.io</id>
 	 		<url>https://jitpack.io</url>
         </repository>
 	</repositories>
 	<dependencies>
+		<!-- MP3 Utilities -->
 		<dependency>
-			<!-- https://mvnrepository.com/artifact/com.googlecode.soundlibs/mp3spi -->
     		<groupId>com.googlecode.soundlibs</groupId>
     		<artifactId>mp3spi</artifactId>
     		<version>1.9.5.4</version>
 		</dependency>
+		<!-- FLAC Utilities -->
+		<dependency>
+    		<groupId>org.jflac</groupId>
+    		<artifactId>jflac-codec</artifactId>
+    		<version>1.5.2</version>
+		</dependency>
+		<!-- OGG Vorbis Utilities -->
+		<dependency>
+   			<groupId>com.googlecode.soundlibs</groupId>
+   			<artifactId>vorbisspi</artifactId>
+    		<version>1.0.3.3</version>
+		</dependency>
+		<!-- Player Base -->
 		<dependency>
  			<groupId>com.github.goxr3plus</groupId>
   		 	<artifactId>java-stream-player</artifactId>

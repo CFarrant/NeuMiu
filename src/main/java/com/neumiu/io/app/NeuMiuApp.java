@@ -1,12 +1,18 @@
 package com.neumiu.io.app;
 
+import com.neumiu.io.control.FXMLController;
+
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class NeuMiuApp extends Application{
+	
+	private FXMLController control = new FXMLController();
 
 	public static void main(String[] args) {
 		Application.launch(NeuMiuApp.class, args);
@@ -20,6 +26,17 @@ public class NeuMiuApp extends Application{
 		stage.setScene(scene);
 		stage.setTitle("NeuMiu");
 		stage.show();
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent event) {
+		        try {
+					control.exit(event);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    }
+		});
 	}
 
 }
