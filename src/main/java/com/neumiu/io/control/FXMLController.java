@@ -36,6 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -181,7 +182,21 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		fileChooser.showOpenDialog(stage);
 	}
 
-	public void shuffel() {
+	@FXML
+	public void change(MouseEvent j) {
+		int count = j.getClickCount();
+		count = 0;
+
+		playSong.setGraphic(new ImageView("'/images/play.jpg'"));
+		if (count % 2 == 0) {
+			playSong.setStyle("-fx-background-image: url('/images/play.jpg')");
+		} else if (count % 0 == 1) {
+			playSong.setStyle("-fx-background-image: url('/images/pause.png')");
+		}
+		count++;
+	}
+
+	public void shuffle() {
 
 	}
 	
@@ -208,21 +223,24 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		seekBar.setMin(0);
 		seekBar.setValue(currentTime);
 	}
-	
+
 	private String time = null;
-	
+
 	private void milliToString(long value) {
-		int mili = (int)(value / 1000);
-        int sec = (mili / 1000) % 60;
-        int min = (mili / 1000) / 60;
-        String secString = String.format("%02d", sec);
-        time = min + ":" + secString;
-        curTime.setText(time);
+		int mili = (int) (value / 1000);
+		int sec = (mili / 1000) % 60;
+		int min = (mili / 1000) / 60;
+		String secString = String.format("%02d", sec);
+		time = min + ":" + secString;
+		curTime.setText(time);
 	}
 
 	private long totalPlayTime = 0;
 
 	public void playSong(ActionEvent pla) {
+
+		playSong.setStyle("-fx-background-image: url('/images/pause.png')");
+
 		if (this.getStatus() != Status.PLAYING && this.getStatus() != Status.PAUSED) {
 			resetPlayer();
 			try {
@@ -239,21 +257,15 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 				}
 				open(song);
 				play();
-				
+
 			} catch (StreamPlayerException e) {
 				e.printStackTrace();
 			}
-		}
-		else if (this.getStatus() == Status.PLAYING) {
+		} else if (this.getStatus() == Status.PLAYING) {
 			pause();
-		}
-		else if (this.getStatus() == Status.PAUSED) {
+		} else if (this.getStatus() == Status.PAUSED) {
 			resume();
 		}
-	}
-
-	public void createSong() {
-
 	}
 
 	public void nextSong(ActionEvent next) {
@@ -261,7 +273,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	public void prevSong(ActionEvent prev) {
-		
+
 	}
 
 	public void stopSong(ActionEvent sto) throws InterruptedException {
@@ -306,16 +318,15 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@Override
-	public void opened(Object arg0, Map<String, Object> arg1) {
-	}
+	public void opened(Object arg0, Map<String, Object> arg1) {}
 
 	private long currentPlayTimeMillis;
 
 	@Override
-	public void progress( int arg0, long arg1, byte[] arg2, Map<String, Object> arg3) {
+	public void progress(int arg0, long arg1, byte[] arg2, Map<String, Object> arg3) {
 		final long temp = arg1;
-		currentPlayTimeMillis = arg1/1000;
-		Platform.runLater(new Runnable(){
+		currentPlayTimeMillis = arg1 / 1000;
+		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				milliToString(temp);
@@ -325,13 +336,11 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@Override
-	public void statusUpdated(StreamPlayerEvent arg0) {
-		System.out.println(arg0.getPlayerStatus());
-	}
+	public void statusUpdated(StreamPlayerEvent arg0) {}
 
 	public void exit(WindowEvent event) throws IOException {
 		stop();
-//		saveApplicationData();
+		// saveApplicationData();
 		System.exit(0);
 	}
 }

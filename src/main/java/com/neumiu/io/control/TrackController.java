@@ -1,9 +1,7 @@
 package com.neumiu.io.control;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 
 import javax.sound.sampled.AudioFileFormat;
@@ -11,13 +9,6 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
-import org.jflac.io.BitInputStream;
-import org.jflac.metadata.Metadata;
-import org.jflac.metadata.StreamInfo;
-import org.jflac.sound.spi.FlacAudioFileReader;
-import org.jflac.sound.spi.FlacAudioFormat;
-import org.jflac.sound.spi.FlacFileFormatType;
 
 import com.neumiu.io.models.Track;
 import com.neumiu.io.utils.FlacAnalyzer;
