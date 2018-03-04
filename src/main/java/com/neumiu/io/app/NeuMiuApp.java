@@ -36,7 +36,5 @@ public class NeuMiuApp extends Application {
 				}
 			}
 		});
-
 	}
-
 }

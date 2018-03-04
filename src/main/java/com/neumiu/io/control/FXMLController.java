@@ -8,12 +8,19 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Map;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import com.neumiu.io.enums.VolumeLevel;
 import com.neumiu.io.utils.ApplicationData;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +52,6 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	private ApplicationData appData;
 	private String fileName = "NeuMiu.db";
 	private boolean mute;
-	private VolumeLevel volume = VolumeLevel.MEDIUM;
 
 	@FXML
 	private TreeView<?> playlistTree;
@@ -54,7 +60,9 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	private ListView<?> songInPlaylist;
 
 	@FXML
-	private Slider volumeSlider, seekBar;
+	public Slider volumeSlider;
+	@FXML
+	private Slider seekBar;
 
 	@FXML
 	private CheckBox muteBox, shuffleBox;
@@ -173,35 +181,25 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		fileChooser.showOpenDialog(stage);
 	}
 
-	public boolean isMute() {
-		return mute;
-	}
-
-	public void setMute(boolean mute) {
-		this.mute = mute;
-	}
-
-	public VolumeLevel getVolume() {
-		return volume;
-	}
-
-	public void setVolume(VolumeLevel volume) {
-		this.volume = volume;
-	}
-
 	public void shuffel() {
 
 	}
-
-	public int volume(int vol) {
-		return vol;
+	
+	public void volume() {
+		
 	}
 
-	public void mute(boolean mute) {
+	public void setVolume() {
+		
+	}
+	
+	public void mute(ActionEvent m) {
 		if (mute == true) {
-
+			setMute(false);
+			mute = false;
 		} else {
-
+			setMute(true);
+			mute = true;
 		}
 	}
 
