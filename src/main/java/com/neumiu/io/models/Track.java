@@ -2,6 +2,7 @@ package com.neumiu.io.models;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.sound.sampled.AudioFileFormat;
@@ -10,8 +11,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 
-public class Track {
+public class Track implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private String title;
 	private String genre;
 	private String artist;

@@ -42,9 +42,9 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Settings">
                    <items>
-                      <MenuItem mnemonicParsing="false" onAction="#setVolume" text="Volume">
+                      <MenuItem mnemonicParsing="false" text="Volume">
                          <graphic>
-                            <Slider fx:id="volumeSlider" showTickLabels="true" min="0" max="100" value="100" orientation="VERTICAL" />
+                            <Slider fx:id="volumeSlider" showTickLabels="true" min="0" max="100" value="50" orientation="VERTICAL" />
                          </graphic>
                       </MenuItem>
                       <MenuItem mnemonicParsing="false" text="Mute">
@@ -52,11 +52,11 @@
                             <CheckBox fx:id="muteBox" onAction="#mute" mnemonicParsing="false" />
                          </graphic>
                       </MenuItem>
-                      <MenuItem mnemonicParsing="false" text="Shuffle">
+                      <!-- MenuItem mnemonicParsing="false" text="Shuffle">
                          <graphic>
                             <CheckBox fx:id="shuffleBox" mnemonicParsing="false" />
                          </graphic>
-                      </MenuItem>
+                      </MenuItem -->
                    </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -132,7 +132,7 @@
                                 </Slider>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                   <children>
-                                    <Label fx:id="curTime">
+                                    <Label fx:id="curTime" text="0:00">
                                       <font>
                                         <Font name="Copperplate Gothic Bold" size="12.0" />
                                       </font>
@@ -140,12 +140,12 @@
                                         <Insets left="5.0" />
                                       </HBox.margin>
                                     </Label>
-                                    <Label fx:id="totalTime">
+                                    <Label fx:id="totalTime" text="0:00">
                                       <font>
                                         <Font name="Copperplate Gothic Bold" size="12.0" />
                                       </font>
                                       <HBox.margin>
-                                        <Insets left="530.0" />
+                                        <Insets left="545.0" />
                                       </HBox.margin>
                                     </Label>
                                   </children>
@@ -155,35 +155,38 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                   <children>
-                                    <Button fx:id="prevSong" mnemonicParsing="false" onAction="#prevSong" text="Previous Song">
-                                      <HBox.margin>
-                                        <Insets left="100.0" right="15.0" />
+                                    <ImageView>
+                                  	  <image>
+                                  	  	<Image url="icons/backward.png" />
+                                  	  </image>
+                                  	  <HBox.margin>
+                                        <Insets left="140.0" bottom="25.0" />
                                       </HBox.margin>
-                                      <font>
-                                         <Font name="Copperplate Gothic Light" size="12.0" />
-                                      </font>
-                                    </Button>
-                                    <Button fx:id="stopSong" mnemonicParsing="false" onAction="#stopSong" text="Stop">
-                                      <font>
-                                        <Font name="Copperplate Gothic Light" size="12.0" />
-                                      </font>
-                                      <HBox.margin>
-                                        <Insets right="15.0" />
+                                    </ImageView>
+                                    <ImageView onMouseClicked="#stopSong">
+                                  	  <image>
+                                  	  	<Image url="icons/stop.png" />
+                                  	  </image>
+                                  	  <HBox.margin>
+                                        <Insets left="20.0" />
                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="playSong" mnemonicParsing="false" onAction="#playSong" text="Play">
-                                      <font>
-                                         <Font name="Copperplate Gothic Light" size="12.0" />
-                                      </font>
-                                      <HBox.margin>
-                                        <Insets right="15.0" />
+                                    </ImageView>
+                                    <ImageView fx:id="playTrack" onMouseClicked="#playSong">
+                                  	  <image>
+                                  	  	<Image url="icons/play.png" />
+                                  	  </image>
+                                  	  <HBox.margin>
+                                        <Insets left="20.0" />
                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="nextSong" mnemonicParsing="false" text="Next Song">
-                                      <font>
-                                        <Font name="Copperplate Gothic Light" size="12.0" />
-                                      </font>
-                                    </Button>
+                                    </ImageView>
+                                    <ImageView>
+                                  	  <image>
+                                  	  	<Image url="icons/forward.png" />
+                                  	  </image>
+                                  	  <HBox.margin>
+                                        <Insets left="20.0" />
+                                      </HBox.margin>
+                                    </ImageView>
                                   </children>
                                 </HBox>
                               </children>

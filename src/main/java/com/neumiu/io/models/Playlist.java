@@ -1,9 +1,11 @@
 package com.neumiu.io.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Playlist {
+public class Playlist implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Track> play;
 	private String listName;
 	private static int untitledCount = 1;

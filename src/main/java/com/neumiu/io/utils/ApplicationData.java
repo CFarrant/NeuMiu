@@ -1,12 +1,14 @@
 package com.neumiu.io.utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.neumiu.io.models.Playlist;
 import com.neumiu.io.models.Track;
 
-public class ApplicationData {
+public class ApplicationData implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Track> allSongs;
 	private ArrayList<Playlist> playlists;
 	
