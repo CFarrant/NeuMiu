@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.Duration;
 import java.util.Map;
 
 import javax.sound.sampled.AudioSystem;
@@ -19,11 +20,14 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import com.neumiu.io.utils.ApplicationData;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -48,44 +52,56 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
 
 public class FXMLController extends StreamPlayer implements StreamPlayerListener {
 
+	//Controllers	
 	private PlaylistController playlist;
 	private TrackController track;
+	
+	//Savable Data
 	private ApplicationData appData;
+	
+	//Variables
+	private double volumeLevel = 50;
 	private String fileName = "NeuMiu.db";
 	private boolean mute;
-
+	private String time = null;
+	private long currentPlayTime;
+	private long totalPlayTime = 0;
+	
+	//GUI Elements
 	@FXML
 	private TreeView<?> playlistTree;
-
 	@FXML
 	private ListView<?> songInPlaylist;
-
 	@FXML
 	public Slider volumeSlider;
 	@FXML
 	private Slider seekBar;
-
 	@FXML
 	private CheckBox muteBox, shuffleBox;
-
 	@FXML
-	private ImageView coverArt;
-
+	private ImageView coverArt, playTrack;
 	@FXML
 	private TextField currentlyPlaying;
-
 	@FXML
 	private Label curTime, totalTime;
-
 	@FXML
-	private Button prevSong, stopSong, pauseSong, playSong, nextSong;
-
+	private Button cancel;
 	@FXML
 	private Canvas mainCanvas;
 
+	public FXMLController() {
+		playlist = new PlaylistController();
+		track = new TrackController();
+		addStreamPlayerListener((StreamPlayerListener) this);
+		try {
+			this.loadApplicationData();
+		} catch (ClassNotFoundException | IOException e) {
+			appData = new ApplicationData();
+		}
+	}
+	
 	@FXML
-	public void helpScreen(ActionEvent f) throws IOException {
-
+	private void helpScreen(ActionEvent f) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -95,7 +111,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@FXML
-	public void browse(ActionEvent r) throws IOException {
+	private void browse(ActionEvent r) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -109,7 +125,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@FXML
-	public void editPlaylist() throws IOException {
+	private void editPlaylist() throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/PlaylistWindow.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -119,7 +135,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@FXML
-	public void addSongs(ActionEvent g) throws IOException {
+	private void addSongs(ActionEvent g) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/AddSongs.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -129,7 +145,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@FXML
-	public void removeSongs(ActionEvent h) throws IOException {
+	private void removeSongs(ActionEvent h) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/RemoveSongs.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -139,15 +155,13 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@FXML
-	private Button cancel;
-
-	@FXML
-	public void closeButton(ActionEvent h) {
+	private void closeButton(ActionEvent h) {
 		Stage stage = (Stage) cancel.getScene().getWindow();
 		stage.close();
 	}
-
-	public void editSong(ActionEvent q) throws IOException {
+	
+	@FXML
+	private void editSong(ActionEvent q) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/EditSong.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -155,20 +169,9 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		stage.setTitle("Edit Song");
 		stage.show();
 	}
-
-	public FXMLController() {
-		playlist = new PlaylistController();
-		track = new TrackController();
-		addStreamPlayerListener((StreamPlayerListener) this);
-		try {
-			this.loadApplicationData();
-		} catch (ClassNotFoundException | IOException e) {
-			appData = new ApplicationData();
-		}
-	}
-
+	
 	@FXML
-	public void addSong(ActionEvent k) throws IOException {
+	private void addSong(ActionEvent k) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/EditSong.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -182,31 +185,9 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		fileChooser.showOpenDialog(stage);
 	}
 
-	@FXML
-	public void change(MouseEvent j) {
-		int count = j.getClickCount();
-		count = 0;
-
-		playSong.setGraphic(new ImageView("'/images/play.jpg'"));
-		if (count % 2 == 0) {
-			playSong.setStyle("-fx-background-image: url('/images/play.jpg')");
-		} else if (count % 0 == 1) {
-			playSong.setStyle("-fx-background-image: url('/images/pause.png')");
-		}
-		count++;
-	}
-
-	public void shuffle() {
-
-	}
-	
-	public void volume() {
-		
-	}
-
-	public void setVolume() {
-		
-	}
+//	public void shuffle() {
+//
+//	}
 	
 	public void mute(ActionEvent m) {
 		if (mute == true) {
@@ -215,6 +196,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		} else {
 			setMute(true);
 			mute = true;
+			muteBox.setSelected(mute);
 		}
 	}
 
@@ -223,8 +205,6 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		seekBar.setMin(0);
 		seekBar.setValue(currentTime);
 	}
-
-	private String time = null;
 
 	private void milliToString(long value) {
 		int mili = (int) (value / 1000);
@@ -235,16 +215,13 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		curTime.setText(time);
 	}
 
-	private long totalPlayTime = 0;
-
-	public void playSong(ActionEvent pla) {
-
-		playSong.setStyle("-fx-background-image: url('/images/pause.png')");
-
+	public void playSong(MouseEvent pla) {
 		if (this.getStatus() != Status.PLAYING && this.getStatus() != Status.PAUSED) {
-			resetPlayer();
+			if (!totalTime.getText().equals("0:00") || !curTime.getText().equals("0:00")) {
+				resetPlayer();
+			}
 			try {
-				File song = new File("sample/song/shadows.flac").getAbsoluteFile();
+				File song = new File("sample/song/music.wav").getAbsoluteFile();
 				try {
 					totalTime.setText(track.getTotalTime(song));
 				} catch (UnsupportedAudioFileException | IOException e) {
@@ -255,16 +232,20 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 				} catch (UnsupportedAudioFileException | IOException e) {
 					e.printStackTrace();
 				}
+				currentlyPlaying.setAlignment(Pos.CENTER);
+				currentlyPlaying.setText(song.getName());
 				open(song);
 				play();
-
 			} catch (StreamPlayerException e) {
 				e.printStackTrace();
 			}
+			playTrack.setImage(new Image("icons/pause.png"));
 		} else if (this.getStatus() == Status.PLAYING) {
 			pause();
+			playTrack.setImage(new Image("icons/play.png"));
 		} else if (this.getStatus() == Status.PAUSED) {
 			resume();
+			playTrack.setImage(new Image("icons/pause.png"));
 		}
 	}
 
@@ -276,9 +257,10 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 
 	}
 
-	public void stopSong(ActionEvent sto) throws InterruptedException {
+	public void stopSong(MouseEvent sto) throws InterruptedException {
 		if (this.getStatus() == Status.PAUSED || this.getStatus() == Status.PLAYING) {
 			stop();
+			playTrack.setImage(new Image("icons/play.png"));
 		}
 	}
 
@@ -317,30 +299,43 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		return appData;
 	}
 
+	public void exit(WindowEvent event) throws IOException {
+		stop();
+		saveApplicationData();
+		System.exit(0);
+	}
+	
+	//MediaPlayer Overrides
 	@Override
-	public void opened(Object arg0, Map<String, Object> arg1) {}
-
-	private long currentPlayTimeMillis;
-
+	public void opened(Object arg0, Map<String, Object> arg1) {
+		setGain(volumeLevel);
+		
+		volumeSlider.valueProperty().addListener(new InvalidationListener() {
+			public void invalidated(Observable ov) {
+				if (volumeSlider.isValueChanging()) {
+					volumeLevel = volumeSlider.getValue() / 100.0;
+					setGain(volumeLevel);
+					mute = false;
+					setMute(mute);
+					muteBox.setSelected(mute);
+				}
+			}
+		});
+	}
+	
 	@Override
 	public void progress(int arg0, long arg1, byte[] arg2, Map<String, Object> arg3) {
 		final long temp = arg1;
-		currentPlayTimeMillis = arg1 / 1000;
+		currentPlayTime = arg1 / 1000;
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				manipulateSeekBar(totalPlayTime, currentPlayTime);
 				milliToString(temp);
-				manipulateSeekBar(totalPlayTime, currentPlayTimeMillis);
 			}
 		});
 	}
 
 	@Override
 	public void statusUpdated(StreamPlayerEvent arg0) {}
-
-	public void exit(WindowEvent event) throws IOException {
-		stop();
-		// saveApplicationData();
-		System.exit(0);
-	}
 }
