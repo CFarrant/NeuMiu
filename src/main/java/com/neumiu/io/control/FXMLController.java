@@ -86,8 +86,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	private Label curTime, totalTime;
 	@FXML
 	private Button cancel;
-	@FXML
-	private Canvas mainCanvas;
+
 
 	public FXMLController() {
 		playlist = new PlaylistController();
