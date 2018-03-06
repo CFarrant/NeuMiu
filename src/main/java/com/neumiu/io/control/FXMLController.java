@@ -98,6 +98,9 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	@FXML
 	private Button cancel, save;
 
+	/**
+	 * constructor that loads songs into player
+	 */
 	public FXMLController() {
 		track = new TrackController();
 		addStreamPlayerListener((StreamPlayerListener) this);
@@ -229,6 +232,11 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		stage.close();
 	}
 
+	/**
+	 * Saves added and edited song info in the player
+	 * 
+	 * @param snsn
+	 */
 	public void saveEditedSong(ActionEvent snsn) {
 		Track temp = addedSongs.get(currentItem);
 		addedSongs.remove(temp);
@@ -254,6 +262,11 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		;
 	}
 
+	/**
+	 * mutes the volume
+	 * 
+	 * @param m
+	 */
 	public void mute(ActionEvent m) {
 		if (mute == true) {
 			setMute(false);
@@ -280,6 +293,13 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		curTime.setText(time);
 	}
 
+	/**
+	 * Plays the music in the music player
+	 * 
+	 * @param pla
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	public void playSong(MouseEvent pla) throws ClassNotFoundException, IOException {
 		if (this.getStatus() != Status.PLAYING && this.getStatus() != Status.PAUSED) {
 			if (!totalTime.getText().equals("0:00") || !curTime.getText().equals("0:00")) {
@@ -345,6 +365,13 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		}
 	}
 
+	/**
+	 * goes one song back in the list og songs and plays it
+	 * 
+	 * @param prev
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	public void prevSong(MouseEvent prev) throws ClassNotFoundException, IOException {
 		int value = 0;
 		if (currentItem > 0 && currentItem != 0) {
@@ -363,6 +390,12 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		}
 	}
 
+	/**
+	 * goes one song forward and plays it
+	 * 
+	 * @param sto
+	 * @throws InterruptedException
+	 */
 	public void stopSong(MouseEvent sto) throws InterruptedException {
 		if (this.getStatus() == Status.PLAYING || this.getStatus() == Status.PAUSED) {
 			stop();
@@ -382,14 +415,30 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		coverArt.setImage(new Image(path));
 	}
 
+	/**
+	 * updates the playlist when songs are edited or added
+	 * 
+	 * @param artist
+	 * @param title
+	 */
 	public void updatePlaying(String artist, String title) {
 		currentlyPlaying.setText(artist + " ~ " + title);
 	}
 
+	/**
+	 * updates how long the song ha been playing
+	 * 
+	 * @param currentPlayTime
+	 */
 	public void updateCurTime(String currentPlayTime) {
 		curTime.setText(currentPlayTime);
 	}
 
+	/**
+	 * updates the length of the song
+	 * 
+	 * @param fullTime
+	 */
 	public void updateTotalTime(String fullTime) {
 		totalTime.setText(fullTime);
 	}
@@ -400,6 +449,13 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		}
 	}
 
+	/**
+	 * loads the songs
+	 * 
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Track> load() throws ClassNotFoundException, IOException {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
@@ -408,6 +464,12 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		return addedSongs;
 	}
 
+	/**
+	 * exits the application and stops any playing songs
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void exit(WindowEvent event) throws IOException {
 		stop();
 		saveDB();
