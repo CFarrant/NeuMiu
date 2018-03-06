@@ -25,14 +25,14 @@
 >| Features | Summary | Status |
 >| -------- |:-------:|:------:|
 >| Functional/Intuitive GUI | Allows ease of access to a user. | DONE |
->| Add Music | Allows user to import music. | PLANNED |
->| Edit Music Info | Allows user to modify the info of the song. | PLANNED |
 >| Audio Controls | Allows changing, pausing or playing a song. | DONE |
 >| Seek Bar | Allows following along where the user is currently at in the song. | DONE |
 >| Volume Slider | Allows controlling how loud the output audio is. | DONE |
->| Create/Edit Playlists | Allows adding select tracks into a playlist that can be played. | PLANNED |
+>| Add Music | Allows user to import music. | PLANNED |
+>| Edit Music Info | Allows user to modify the info of the song. | PLANNED |
 >| Song Shuffling | Shuffles songs. | PLANNED |
->| Sort by: Length/Title/Import Date | Allows users to sort their songs via their length, title, or the date that they were Imported on. | PLANNED |
+>| Sort by: Length/Title/Import Date | Allows users to sort their songs via their length, title, or the date that they were Imported on. | STRETCH |
+>| Create/Edit Playlists | Allows adding select tracks into a playlist that can be played. | STRETCH |
 >| Time Stamping | Allows Users to place flags at certain times points. | STRETCH |
 >| EQ~ing | Lets users have their own unique EQ settings. | STRETCH |
 >| Youtube to MP3 | Automatically transforms a Youtube Link into a MP3 File. | STRETCH |
