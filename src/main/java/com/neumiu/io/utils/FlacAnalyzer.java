@@ -10,7 +10,13 @@ import org.jflac.frame.Frame;
 import org.jflac.metadata.Metadata;
 
 public class FlacAnalyzer implements FrameListener {
-	
+	/**
+	 * analyzed the time of the flac file
+	 * 
+	 * @param file
+	 * @return the time of the file
+	 * @throws IOException
+	 */
 	public double analyse(File file) throws IOException {
 		FileInputStream is = new FileInputStream(file);
 		FLACDecoder decoder = new FLACDecoder(is);
@@ -18,15 +24,18 @@ public class FlacAnalyzer implements FrameListener {
 		decoder.decode();
 		double totalSample = decoder.getStreamInfo().getTotalSamples();
 		double sampleRate = decoder.getStreamInfo().getSampleRate();
-		return totalSample/sampleRate;
+		return totalSample / sampleRate;
 	}
 
 	@Override
-	public void processError(String arg0) {}
+	public void processError(String arg0) {
+	}
 
 	@Override
-	public void processFrame(Frame arg0) {}
+	public void processFrame(Frame arg0) {
+	}
 
 	@Override
-	public void processMetadata(Metadata arg0) {}
+	public void processMetadata(Metadata arg0) {
+	}
 }
