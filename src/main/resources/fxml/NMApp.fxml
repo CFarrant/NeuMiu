@@ -29,16 +29,13 @@
                 <Menu mnemonicParsing="false" text="Songs">
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#addSong" text="Add Song" />
-                    <MenuItem mnemonicParsing="false" onAction="#editSong" text="Edit Song" />
-                    <MenuItem mnemonicParsing="false" text="Remove Song" />
                   </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Playlists">
-                   <items>
-                      <MenuItem mnemonicParsing="false" text="Create Playlist" />
-                      <MenuItem mnemonicParsing="false" onAction="#editPlaylist" text="Edit Playlist" />
-                      <MenuItem mnemonicParsing="false" text="Remove Playlist" />
-                   </items>
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#addSong" text="Edit Song" />
+                  </items>
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#addSong" text="Remove Song" />
+                  </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Settings">
                    <items>
@@ -52,12 +49,21 @@
                             <CheckBox fx:id="muteBox" onAction="#mute" mnemonicParsing="false" />
                          </graphic>
                       </MenuItem>
-                      <!-- MenuItem mnemonicParsing="false" text="Shuffle">
+                   </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Controls">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Shuffle">
                          <graphic>
                             <CheckBox fx:id="shuffleBox" mnemonicParsing="false" />
                          </graphic>
-                      </MenuItem -->
-                   </items>
+                      </MenuItem>
+                      <MenuItem mnemonicParsing="false" text="Repeat Song">
+                         <graphic>
+                            <CheckBox fx:id="shuffleBox" mnemonicParsing="false" />
+                         </graphic>
+                      </MenuItem>
+                  </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
@@ -72,30 +78,16 @@
                    <children>
                       <SplitPane dividerPositions="0.5">
                         <items>
-                            <AnchorPane>
-                               <children>
-                                  <VBox prefHeight="400.0" prefWidth="200.0">
-                                     <children>
-                                        <Label text="Playlist(s)">
-                                           <font>
-                                              <Font name="Copperplate Gothic Bold" size="12.0" />
-                                           </font>
-                                        </Label>
-                                        <TreeView fx:id="playlistTree" prefWidth="200.0" />
-                                     </children>
-                                  </VBox>
-                                </children>
-                              </AnchorPane>
                               <AnchorPane>
                                 <children>
-                                  <VBox prefHeight="400.0" prefWidth="600.0">
+                                  <VBox prefHeight="400.0" prefWidth="800.0">
                                     <children>
                                       <Label text="Song(s)">
                                         <font>
                                           <Font name="Copperplate Gothic Bold" size="12.0" />
                                         </font>
                                       </Label>
-                                      <ListView fx:id="songInPlaylist" prefHeight="387.0" prefWidth="600.0" />
+                                      <ListView fx:id="songInPlaylist" prefHeight="387.0" prefWidth="800.0" />
                                     </children>
                                   </VBox>
                                 </children>
@@ -145,7 +137,7 @@
                                         <Font name="Copperplate Gothic Bold" size="12.0" />
                                       </font>
                                       <HBox.margin>
-                                        <Insets left="535.0" />
+                                        <Insets left="527.0" />
                                       </HBox.margin>
                                     </Label>
                                   </children>

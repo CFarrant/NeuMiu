@@ -10,15 +10,12 @@ import java.util.Map;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import com.neumiu.io.data.DBController;
-import com.neumiu.io.models.Playlist;
+import com.neumiu.io.data.SongDB;
 import com.neumiu.io.models.Track;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +30,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -49,15 +45,13 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
 public class FXMLController extends StreamPlayer implements StreamPlayerListener {
 
 	//Controllers	
-	private PlaylistController playlist;
 	private TrackController track;
 	
 	//Savable Data
-	private static DBController PlayerDB;
+	private static SongDB addedSongs;
 	
 	//ListView Controls
-	private static ObservableList<Track> songDB = FXCollections.observableArrayList();
-	private static ObservableList<Playlist> playlistDB = FXCollections.observableArrayList();
+//	private static ObservableList<Track> songDB = FXCollections.observableArrayList();
 	
 	//Variables
 	private double volumeLevel = 50;
@@ -76,8 +70,6 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	
 	//GUI Elements
 	@FXML
-	private TreeView<?> playlistTree;
-	@FXML
 	private ListView<?> songInPlaylist;
 	@FXML
 	public Slider volumeSlider;
@@ -95,14 +87,13 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	private Button cancel, save;
 
 	public FXMLController() {
-		playlist = new PlaylistController();
 		track = new TrackController();
 		addStreamPlayerListener((StreamPlayerListener) this);
 		try {
 			this.loadDB();
-			System.out.println("loaded "+PlayerDB.getAllSong().size());
+			System.out.println("loaded "+addedSongs.getSongDB().size());
 		} catch (ClassNotFoundException | IOException e) {
-			PlayerDB = new DBController();
+			addedSongs = new SongDB();
 		}
 	}
 
@@ -156,36 +147,6 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@FXML
-	private void editPlaylist() throws IOException {
-		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/PlaylistWindow.fxml"));
-		Stage stage = new Stage();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Edit Playlist");
-		stage.show();
-	}
-
-	@FXML
-	private void addSongs(ActionEvent g) throws IOException {
-		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/AddSongs.fxml"));
-		Stage stage = new Stage();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Add Songs to Playlist");
-		stage.show();
-	}
-
-	@FXML
-	private void removeSongs(ActionEvent h) throws IOException {
-		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/RemoveSongs.fxml"));
-		Stage stage = new Stage();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Remove Songs From Playlist");
-		stage.show();
-	}
-
-	@FXML
 	private void closeButton(ActionEvent h) {
 		Stage stage = (Stage) cancel.getScene().getWindow();
 		stage.close();
@@ -215,7 +176,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		title = addSongName.getText();
 		artist = addSongArtist.getText();
 		genre = addSongArtist.getText();
-		PlayerDB.getAllSong().add(new Track(title, genre, artist, newSong, artwork));
+		addedSongs.getSongDB().add(new Track(title, genre, artist, newSong, artwork));
 		Stage stage = (Stage) cancel.getScene().getWindow();
 		stage.close();
 	}
@@ -251,7 +212,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 			if (!totalTime.getText().equals("0:00") || !curTime.getText().equals("0:00")) {
 				resetPlayer();
 			}
-			System.out.println(PlayerDB.getAllSong().size());
+			System.out.println(addedSongs.getSongDB().size());
 			File song = null;
 			File art = null;
 			try {
@@ -336,15 +297,15 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 
 	private void saveDB() throws IOException {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
-			out.writeObject(PlayerDB);
+			out.writeObject(addedSongs);
 		}
 	}
 
-	public DBController loadDB() throws ClassNotFoundException, IOException {
+	public SongDB loadDB() throws ClassNotFoundException, IOException {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
-			PlayerDB = (DBController) in.readObject();
+			addedSongs = (SongDB) in.readObject();
 		}
-		return PlayerDB;
+		return addedSongs;
 	}
 
 	public void exit(WindowEvent event) throws IOException {
