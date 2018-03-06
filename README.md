@@ -35,4 +35,3 @@
 >| Create/Edit Playlists | Allows adding select tracks into a playlist that can be played. | STRETCH |
 >| Time Stamping | Allows Users to place flags at certain times points. | STRETCH |
 >| EQ~ing | Lets users have their own unique EQ settings. | STRETCH |
->| Youtube to MP3 | Automatically transforms a Youtube Link into a MP3 File. | STRETCH |
