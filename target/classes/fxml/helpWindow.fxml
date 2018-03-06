@@ -14,7 +14,7 @@
 							<Font name="Comic Sans MS" size="27.0" />
 						</font>
 					</Label>
-					<Label layoutX="47.0" layoutY="66.0" prefHeight="52.0" prefWidth="164.0" text="How to play a song - hit Play" />
+					<Label layoutX="38.0" layoutY="79.0" prefHeight="26.0" prefWidth="255.0" text="How to play a song - hit Play and hope it works" />
 					<Label layoutX="333.0" layoutY="83.0" prefHeight="17.0" prefWidth="182.0" text="How to Pause a song - hit Pause" />
 					<Label layoutX="47.0" layoutY="118.0" prefHeight="17.0" prefWidth="164.0" text="How to Make a Playlist" />
 					<Label layoutX="42.0" layoutY="255.0" prefHeight="17.0" prefWidth="133.0" text="How to edit a Playlist" />

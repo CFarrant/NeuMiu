@@ -44,31 +44,32 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
 
 public class FXMLController extends StreamPlayer implements StreamPlayerListener {
 
-	//Controllers	
+	// Controllers
 	private TrackController track;
-	
-	//Savable Data
+
+	// Savable Data
 	private static SongDB addedSongs;
-	
-	//ListView Controls
-//	private static ObservableList<Track> songDB = FXCollections.observableArrayList();
-	
-	//Variables
+
+	// ListView Controls
+	// private static ObservableList<Track> songDB =
+	// FXCollections.observableArrayList();
+
+	// Variables
 	private double volumeLevel = 50;
 	private String fileName = "NeuMiu.db";
 	private boolean mute;
 	private String time = null;
 	private long currentPlayTime;
 	private long totalPlayTime = 0;
-	
-	//Temp Song Variables
+
+	// Temp Song Variables
 	private static String newSong = null;
 	private static String title = null;
 	private static String genre = null;
 	private static String artist = null;
 	private static String artwork = null;
-	
-	//GUI Elements
+
+	// GUI Elements
 	@FXML
 	private ListView<?> songInPlaylist;
 	@FXML
@@ -91,20 +92,20 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		addStreamPlayerListener((StreamPlayerListener) this);
 		try {
 			this.loadDB();
-			System.out.println("loaded "+addedSongs.getSongDB().size());
+			System.out.println("loaded " + addedSongs.getSongDB().size());
 		} catch (ClassNotFoundException | IOException e) {
 			addedSongs = new SongDB();
 		}
 	}
 
-	 private void showAlert(String title, String header, String text, AlertType type) {
-		 Alert alert = new Alert(type);
-		 alert.setTitle(title);
-		 alert.setHeaderText(header);
-		 alert.setContentText(text);
-		 alert.showAndWait();
-	 }
-    
+	private void showAlert(String title, String header, String text, AlertType type) {
+		Alert alert = new Alert(type);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(text);
+		alert.showAndWait();
+	}
+
 	@FXML
 	private void helpScreen(ActionEvent f) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
@@ -125,11 +126,12 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Change Cover Art");
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-				new FileChooser.ExtensionFilter("PNG", "*.png"));
+				new FileChooser.ExtensionFilter("PNG", "*.png"), new FileChooser.ExtensionFilter("PNG", "*.png"),
+				new FileChooser.ExtensionFilter("TIFF", "*.tiff"));
 		File art = fileChooser.showOpenDialog(stage);
 		artwork = art.getPath();
 	}
-	
+
 	@FXML
 	private void browseMusic(ActionEvent r) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
@@ -151,7 +153,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		Stage stage = (Stage) cancel.getScene().getWindow();
 		stage.close();
 	}
-	
+
 	@FXML
 	private void editSong(ActionEvent q) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/EditSong.fxml"));
@@ -161,7 +163,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		stage.setTitle("Edit Song");
 		stage.show();
 	}
-	
+
 	@FXML
 	private void addSong(ActionEvent k) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/NewSong.fxml"));
@@ -171,7 +173,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		stage.setTitle("Add New Song");
 		stage.show();
 	}
-	
+
 	public void saveNewSong(ActionEvent sNS) throws UnsupportedAudioFileException, IOException {
 		title = addSongName.getText();
 		artist = addSongArtist.getText();
@@ -180,7 +182,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		Stage stage = (Stage) cancel.getScene().getWindow();
 		stage.close();
 	}
-	
+
 	public void mute(ActionEvent m) {
 		if (mute == true) {
 			setMute(false);
@@ -222,7 +224,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 				if (song == null) {
 					showAlert("Error", null, "There is no song selected to be played!", AlertType.ERROR);
 				}
-			} 
+			}
 			if (song != null) {
 				try {
 					totalTime.setText(track.getTotalTime(song));
@@ -231,7 +233,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 					showAlert("Warning", null, "The song failed to calculate the total play time!", AlertType.WARNING);
 				}
 				currentlyPlaying.setAlignment(Pos.CENTER);
-				currentlyPlaying.setText(artist+" ~ "+title);
+				currentlyPlaying.setText(artist + " ~ " + title);
 				try {
 					coverArt.setImage(new Image(new FileInputStream(art)));
 				} catch (NullPointerException e) {
@@ -245,12 +247,10 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 				}
 				playTrack.setImage(new Image("icons/pause.png"));
 			}
-		}
-		else if (this.getStatus() == Status.PLAYING) {
+		} else if (this.getStatus() == Status.PLAYING) {
 			pause();
 			playTrack.setImage(new Image("icons/play.png"));
-		}
-		else if (this.getStatus() == Status.PAUSED) {
+		} else if (this.getStatus() == Status.PAUSED) {
 			resume();
 			playTrack.setImage(new Image("icons/pause.png"));
 		}
@@ -313,12 +313,12 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		saveDB();
 		System.exit(0);
 	}
-	
-	//MediaPlayer Overrides
+
+	// MediaPlayer Overrides
 	@Override
 	public void opened(Object arg0, Map<String, Object> arg1) {
 		setGain(volumeLevel);
-		
+
 		volumeSlider.valueProperty().addListener(new InvalidationListener() {
 			public void invalidated(Observable ov) {
 				if (volumeSlider.isValueChanging()) {
@@ -346,5 +346,6 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@Override
-	public void statusUpdated(StreamPlayerEvent arg0) {}
+	public void statusUpdated(StreamPlayerEvent arg0) {
+	}
 }
