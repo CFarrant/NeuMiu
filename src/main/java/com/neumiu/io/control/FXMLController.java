@@ -49,7 +49,11 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayer;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
-
+/**
+ * Controls the GIU
+ * @author ME
+ *
+ */
 public class FXMLController extends StreamPlayer implements Initializable, StreamPlayerListener {
 
 	// Controllers
