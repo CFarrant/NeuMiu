@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -89,7 +90,7 @@
                                       </Label>
                                           <ScrollPane prefWidth="784.4">
                                              <content>
-                                                <TableView fx:id="songInPlaylist" onMousePressed="#refresh" prefWidth="784.4">
+                                                <TableView fx:id="songInPlaylist" onMousePressed="#refresh" editable="false" prefWidth="784.4">
                                                   <columns>
                                                     <TableColumn fx:id="titleValue" prefWidth="344.4444749355316" text="Title" />
                                                     <TableColumn fx:id="artistValue" prefWidth="252.88876342773438" text="Artist" />

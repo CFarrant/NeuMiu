@@ -20,7 +20,6 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -113,17 +112,10 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		} catch (ClassNotFoundException | IOException e) {
 			addedSongs = new ArrayList<>();
 		}
-		songs = FXCollections.observableArrayList(addedSongs);
 		songInPlaylist = new TableView<Track>();
+		songs.setAll(addedSongs);
 	}
 
-	/**
-	 * gets the information from the song
-	 * 
-	 * @param song
-	 * @throws ClassNotFoundException
-	 * @throws IOException
-	 */
 	protected void getSongInfo(Track song) throws ClassNotFoundException, IOException {
 		try {
 			title = song.getTitle();
@@ -217,6 +209,7 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	private void removeSong(ActionEvent rms) {
 		try {
 			addedSongs.remove(currentItem);
+			syncDB();
 		} catch (IndexOutOfBoundsException ex) {
 			showAlert("Warning", null, "There are no songs to remove!", AlertType.WARNING);
 		}
@@ -239,6 +232,7 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		artist = addSongArtist.getText();
 		genre = addSongGenre.getText();
 		addedSongs.add(new Track(title, genre, artist, newSong, artwork));
+		syncDB();
 		Stage stage = (Stage) cancel.getScene().getWindow();
 		stage.close();
 	}
@@ -267,10 +261,10 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 				temp.setArtwork(artwork);
 			}
 		}
-		addedSongs.add(temp);
+		addedSongs.set(currentItem-1, temp);
+		syncDB();
 		Stage stage = (Stage) cancel.getScene().getWindow();
 		stage.close();
-		;
 	}
 
 	/**
@@ -374,6 +368,11 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		} else {
 			showAlert("Information", null, "You have reached the end of the song list!", AlertType.INFORMATION);
 		}
+	}
+	
+	private void syncDB() {
+		songs.removeAll(songs);
+		songs.addAll(addedSongs);
 	}
 
 	/**
