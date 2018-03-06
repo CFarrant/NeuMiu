@@ -145,7 +145,7 @@
                                         <Font name="Copperplate Gothic Bold" size="12.0" />
                                       </font>
                                       <HBox.margin>
-                                        <Insets left="545.0" />
+                                        <Insets left="535.0" />
                                       </HBox.margin>
                                     </Label>
                                   </children>

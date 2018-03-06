@@ -6,31 +6,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.time.Duration;
 import java.util.Map;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.Line;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.Mixer;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import com.neumiu.io.utils.ApplicationData;
+import com.neumiu.io.data.DBController;
+import com.neumiu.io.models.Playlist;
+import com.neumiu.io.models.Track;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -57,7 +53,11 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	private TrackController track;
 	
 	//Savable Data
-	private ApplicationData appData;
+	private static DBController PlayerDB;
+	
+	//ListView Controls
+	private static ObservableList<Track> songDB = FXCollections.observableArrayList();
+	private static ObservableList<Playlist> playlistDB = FXCollections.observableArrayList();
 	
 	//Variables
 	private double volumeLevel = 50;
@@ -66,6 +66,13 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	private String time = null;
 	private long currentPlayTime;
 	private long totalPlayTime = 0;
+	
+	//Temp Song Variables
+	private static String newSong = null;
+	private static String title = null;
+	private static String genre = null;
+	private static String artist = null;
+	private static String artwork = null;
 	
 	//GUI Elements
 	@FXML
@@ -81,24 +88,32 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	@FXML
 	private ImageView coverArt, playTrack;
 	@FXML
-	private TextField currentlyPlaying;
+	private TextField currentlyPlaying, addSongName, addSongGenre, addSongArtist;
 	@FXML
 	private Label curTime, totalTime;
 	@FXML
-	private Button cancel;
-
+	private Button cancel, save;
 
 	public FXMLController() {
 		playlist = new PlaylistController();
 		track = new TrackController();
 		addStreamPlayerListener((StreamPlayerListener) this);
 		try {
-			this.loadApplicationData();
+			this.loadDB();
+			System.out.println("loaded "+PlayerDB.getAllSong().size());
 		} catch (ClassNotFoundException | IOException e) {
-			appData = new ApplicationData();
+			PlayerDB = new DBController();
 		}
 	}
-	
+
+	 private void showAlert(String title, String header, String text, AlertType type) {
+		 Alert alert = new Alert(type);
+		 alert.setTitle(title);
+		 alert.setHeaderText(header);
+		 alert.setContentText(text);
+		 alert.showAndWait();
+	 }
+    
 	@FXML
 	private void helpScreen(ActionEvent f) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
@@ -110,7 +125,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	@FXML
-	private void browse(ActionEvent r) throws IOException {
+	private void browseImage(ActionEvent r) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -120,7 +135,24 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		fileChooser.setTitle("Change Cover Art");
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG", "*.jpg"),
 				new FileChooser.ExtensionFilter("PNG", "*.png"));
-		fileChooser.showOpenDialog(stage);
+		File art = fileChooser.showOpenDialog(stage);
+		artwork = art.getPath();
+	}
+	
+	@FXML
+	private void browseMusic(ActionEvent r) throws IOException {
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/helpWindow.fxml"));
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Add Song");
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"),
+				new FileChooser.ExtensionFilter("OGG", "*.ogg"), new FileChooser.ExtensionFilter("WAV", "*.wav"),
+				new FileChooser.ExtensionFilter("FLAC", "*.flac"));
+		File song = fileChooser.showOpenDialog(stage);
+		newSong = song.getPath();
 	}
 
 	@FXML
@@ -171,22 +203,22 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	
 	@FXML
 	private void addSong(ActionEvent k) throws IOException {
-		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/EditSong.fxml"));
+		Parent root = FXMLLoader.load(this.getClass().getClassLoader().getResource("fxml/NewSong.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Add Song");
-		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"),
-				new FileChooser.ExtensionFilter("OGG", "*.ogg"), new FileChooser.ExtensionFilter("WAV", "*.wav"),
-				new FileChooser.ExtensionFilter("FLAC", "*.flac"));
-		fileChooser.showOpenDialog(stage);
+		stage.setTitle("Add New Song");
+		stage.show();
 	}
-
-//	public void shuffle() {
-//
-//	}
+	
+	public void saveNewSong(ActionEvent sNS) throws UnsupportedAudioFileException, IOException {
+		title = addSongName.getText();
+		artist = addSongArtist.getText();
+		genre = addSongArtist.getText();
+		PlayerDB.getAllSong().add(new Track(title, genre, artist, newSong, artwork));
+		Stage stage = (Stage) cancel.getScene().getWindow();
+		stage.close();
+	}
 	
 	public void mute(ActionEvent m) {
 		if (mute == true) {
@@ -214,35 +246,50 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		curTime.setText(time);
 	}
 
-	public void playSong(MouseEvent pla) {
+	public void playSong(MouseEvent pla) throws ClassNotFoundException, IOException {
 		if (this.getStatus() != Status.PLAYING && this.getStatus() != Status.PAUSED) {
 			if (!totalTime.getText().equals("0:00") || !curTime.getText().equals("0:00")) {
 				resetPlayer();
 			}
+			System.out.println(PlayerDB.getAllSong().size());
+			File song = null;
+			File art = null;
 			try {
-				File song = new File("sample/song/music.wav").getAbsoluteFile();
+				song = new File(newSong);
+				art = new File(artwork);
+			} catch (NullPointerException e) {
+				if (song == null) {
+					showAlert("Error", null, "There is no song selected to be played!", AlertType.ERROR);
+				}
+			} 
+			if (song != null) {
 				try {
 					totalTime.setText(track.getTotalTime(song));
-				} catch (UnsupportedAudioFileException | IOException e) {
-					e.printStackTrace();
-				}
-				try {
 					totalPlayTime = track.getTotalTimeMillis(song);
 				} catch (UnsupportedAudioFileException | IOException e) {
-					e.printStackTrace();
+					showAlert("Warning", null, "The song failed to calculate the total play time!", AlertType.WARNING);
 				}
 				currentlyPlaying.setAlignment(Pos.CENTER);
-				currentlyPlaying.setText(song.getName());
-				open(song);
-				play();
-			} catch (StreamPlayerException e) {
-				e.printStackTrace();
+				currentlyPlaying.setText(artist+" ~ "+title);
+				try {
+					coverArt.setImage(new Image(new FileInputStream(art)));
+				} catch (NullPointerException e) {
+					coverArt.setImage(new Image("images/NoArtwork.png"));
+				}
+				try {
+					open(song);
+					play();
+				} catch (StreamPlayerException e) {
+					e.printStackTrace();
+				}
+				playTrack.setImage(new Image("icons/pause.png"));
 			}
-			playTrack.setImage(new Image("icons/pause.png"));
-		} else if (this.getStatus() == Status.PLAYING) {
+		}
+		else if (this.getStatus() == Status.PLAYING) {
 			pause();
 			playTrack.setImage(new Image("icons/play.png"));
-		} else if (this.getStatus() == Status.PAUSED) {
+		}
+		else if (this.getStatus() == Status.PAUSED) {
 			resume();
 			playTrack.setImage(new Image("icons/pause.png"));
 		}
@@ -257,9 +304,11 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 	}
 
 	public void stopSong(MouseEvent sto) throws InterruptedException {
-		if (this.getStatus() == Status.PAUSED || this.getStatus() == Status.PLAYING) {
+		if (this.getStatus() == Status.PLAYING || this.getStatus() == Status.PAUSED) {
 			stop();
 			playTrack.setImage(new Image("icons/play.png"));
+			coverArt.setImage(new Image("images/NoArtwork.png"));
+			currentlyPlaying.setText("");
 		}
 	}
 
@@ -285,22 +334,22 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 		totalTime.setText(fullTime);
 	}
 
-	private void saveApplicationData() throws IOException {
+	private void saveDB() throws IOException {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
-			out.writeObject(this.appData);
+			out.writeObject(PlayerDB);
 		}
 	}
 
-	public ApplicationData loadApplicationData() throws ClassNotFoundException, IOException {
+	public DBController loadDB() throws ClassNotFoundException, IOException {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
-			this.appData = (ApplicationData) in.readObject();
+			PlayerDB = (DBController) in.readObject();
 		}
-		return appData;
+		return PlayerDB;
 	}
 
 	public void exit(WindowEvent event) throws IOException {
 		stop();
-		saveApplicationData();
+		saveDB();
 		System.exit(0);
 	}
 	
@@ -321,7 +370,7 @@ public class FXMLController extends StreamPlayer implements StreamPlayerListener
 			}
 		});
 	}
-	
+
 	@Override
 	public void progress(int arg0, long arg1, byte[] arg2, Map<String, Object> arg3) {
 		final long temp = arg1;

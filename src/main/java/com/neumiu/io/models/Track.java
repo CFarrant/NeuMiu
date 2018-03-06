@@ -1,15 +1,9 @@
 package com.neumiu.io.models;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Map;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
-import org.tritonus.share.sampled.file.TAudioFileFormat;
 
 public class Track implements Serializable{
 
@@ -17,7 +11,6 @@ public class Track implements Serializable{
 	private String title;
 	private String genre;
 	private String artist;
-	private String totalTime;
 	private String songPath;
 	private String artPath;
 	private final String noArtwork = "images/NoArtwork.png";
@@ -30,25 +23,6 @@ public class Track implements Serializable{
 		this.setArtist(artist);
 		this.setSongPath(song);
 		this.setArtwork(art);
-		this.setTotalTime(calcTotalTime());
-	}
-	
-	private String calcTotalTime() throws UnsupportedAudioFileException, IOException {
-		String time = null;
-		File file = new File(getSongPath());
-		AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(file);
-	    if (fileFormat instanceof TAudioFileFormat) {
-	        Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
-	        String key = "duration";
-	        Long microseconds = (Long) properties.get(key);
-	        int mili = (int) (microseconds / 1000);
-	        int sec = (mili / 1000) % 60;
-	        int min = (mili / 1000) / 60;
-	        time = min + ":" + sec;
-	    } else {
-	        throw new UnsupportedAudioFileException();
-	    }
-		return time;
 	}
 
 	public String getTitle() {
@@ -105,12 +79,9 @@ public class Track implements Serializable{
 		}
 		this.artPath = art;
 	}
-
-	public String getTotalTime() {
-		return totalTime;
-	}
-
-	public void setTotalTime(String totalTime) {
-		this.totalTime = totalTime;
+	
+	@Override
+	public String toString() {
+		return this.getArtist()+" ~ "+this.getTitle()+" ~ "+this.getGenre();
 	}
 }
