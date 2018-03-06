@@ -113,6 +113,13 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		songInPlaylist = new TableView<Track>();
 	}
 
+	/**
+	 * gets the information from the song
+	 * 
+	 * @param song
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	protected void getSongInfo(Track song) throws ClassNotFoundException, IOException {
 		try {
 			title = song.getTitle();
