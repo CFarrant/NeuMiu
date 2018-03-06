@@ -18,7 +18,6 @@
 >__OGG__ ~ _Jargon for Ogging_.  
 >__FLAC__ ~ _Free Lossless Audio Codec_.  
 >__WAV__ ~ _Waveform Audio File_.  
->__EQ__ ~ _Equalizer(Equalization)_.
 
 ### Planned Features:  
 
