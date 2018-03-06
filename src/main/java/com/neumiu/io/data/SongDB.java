@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.neumiu.io.models.Track;
-
+/**
+ * 
+ * @author Chris
+ *
+ */
 public class SongDB implements Serializable {
 
 	private static final long serialVersionUID = 1L;

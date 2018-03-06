@@ -12,7 +12,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import com.neumiu.io.models.Track;
 import com.neumiu.io.utils.FlacAnalyzer;
-
+/**
+ * 
+ * @author Chris
+ *
+ */
 public class TrackController {
 	/**
 	 * TrackController Constructor

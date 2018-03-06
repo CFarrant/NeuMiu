@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
-
+/**
+ * 
+ * @author ME
+ *
+ */
 public class Track implements Serializable {
 
 	private static final long serialVersionUID = 1L;
