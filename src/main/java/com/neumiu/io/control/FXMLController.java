@@ -20,6 +20,7 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,7 +63,7 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	private static List<Track> addedSongs;
 
 	// ListView Controls
-	private static ObservableList<Track> songs;
+	private static ObservableList<Track> songs = FXCollections.observableArrayList();
 
 	// Variables
 	private double volumeLevel = 50;
