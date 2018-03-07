@@ -5,9 +5,8 @@ import java.io.Serializable;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 /**
- * 
- * @author ME
- *
+ * The Track Model
+ * @author NeuMiu Team
  */
 public class Track implements Serializable {
 
@@ -20,19 +19,17 @@ public class Track implements Serializable {
 	private final String noArtwork = "images/NoArtwork.png";
 
 	/**
-	 * Track Constructor
+	 * Default Track Constructor
 	 */
-	public Track() {
-	}
+	public Track() {}
 
 	/**
-	 * Overidden track constructor
-	 * 
-	 * @param t
-	 * @param g
-	 * @param artist
-	 * @param song
-	 * @param art
+	 * Loaded Track Constructor
+	 * @param t (String)
+	 * @param g (String)
+	 * @param artist (String)
+ 	 * @param song (String)
+	 * @param art (String)
 	 * @throws UnsupportedAudioFileException
 	 * @throws IOException
 	 */
@@ -46,18 +43,16 @@ public class Track implements Serializable {
 	}
 
 	/**
-	 * gets the Track title
-	 * 
-	 * @return
+	 * Gets the "Title" of a Track Instance
+	 * @return title - Title of Track
 	 */
 	public String getTitle() {
 		return title;
 	}
 
 	/**
-	 * sets the track title
-	 * 
-	 * @param title
+	 * Sets the "Title" of a Track Instance 
+	 * @param title (String)
 	 */
 	public void setTitle(String title) {
 		if (title == null || title.isEmpty()) {
@@ -67,18 +62,16 @@ public class Track implements Serializable {
 	}
 
 	/**
-	 * gets the genre
-	 * 
-	 * @return
+	 * Gets the "Genre" of a Track Instance
+	 * @return genre - Genre of Track
 	 */
 	public String getGenre() {
 		return genre;
 	}
 
 	/**
-	 * sats the genre
-	 * 
-	 * @param genre
+	 * Sets the "Genre" of a Track Instance
+	 * @param genre (String)
 	 */
 	public void setGenre(String genre) {
 		if (genre == null || genre.isEmpty()) {
@@ -86,11 +79,19 @@ public class Track implements Serializable {
 		}
 		this.genre = genre;
 	}
-
+	
+	/**
+	 * Gets the "Artist" of a Track Instance
+	 * @return artist - Artist of Track
+	 */
 	public String getArtist() {
 		return artist;
 	}
 
+	/**
+	 * Sets the "Artist" of a Track Instance
+	 * @return artist (String)
+	 */
 	public void setArtist(String artist) {
 		if (artist == null || artist.isEmpty()) {
 			this.artist = "Unknown";
@@ -99,18 +100,16 @@ public class Track implements Serializable {
 	}
 
 	/**
-	 * gets the path of the song
-	 * 
-	 * @return
+	 * Gets the "Song File Path" of a Track Instance
+	 * @return songPath - Song File Path of Track
 	 */
 	public String getSongPath() {
 		return songPath;
 	}
 
 	/**
-	 * sets the path of the song
-	 * 
-	 * @param song
+	 * Sets the "Song File Path" of a Track Instance
+	 * @return songPath (String)
 	 */
 	public void setSongPath(String song) {
 		if (song == null || song.isEmpty()) {
@@ -120,18 +119,16 @@ public class Track implements Serializable {
 	}
 
 	/**
-	 * gets the artwork path
-	 * 
-	 * @return
+	 * Gets the "Artwork File Path" of a Track Instance
+	 * @return artPath - Artwork File Path of Track
 	 */
 	public String getArtwork() {
 		return artPath;
 	}
 
 	/**
-	 * sets the artwork path
-	 * 
-	 * @param art
+	 * Sets the "Artwork File Path" of a Track Instance
+	 * @return artPath (String)
 	 */
 	public void setArtwork(String art) {
 		if (art == null || art.isEmpty()) {
