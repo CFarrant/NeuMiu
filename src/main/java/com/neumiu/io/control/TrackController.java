@@ -10,53 +10,21 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import com.neumiu.io.models.Track;
 import com.neumiu.io.utils.FlacAnalyzer;
 /**
- * 
- * @author Chris
- *
+ * The TrackController Class
+ * @author NeuMiu Team
  */
 public class TrackController {
 	/**
-	 * TrackController Constructor
+	 * TrackController Default Constructor
 	 */
-	public TrackController() {
-	}
+	public TrackController() {}
 
 	/**
-	 * adds a track
-	 * 
-	 * @param track
-	 */
-	public void addTrack(Track track) {
-
-	}
-
-	/**
-	 * edits a track
-	 * 
-	 * @param track
-	 */
-	public void editTrack(Track track) {
-
-	}
-
-	/**
-	 * removes a track
-	 * 
-	 * @param track
-	 */
-	public void removeTrack(Track track) {
-
-	}
-
-	/**
-	 * gets and displays the song of the time keeps track of how much time has
-	 * passed
-	 * 
-	 * @param song
-	 * @return
+	 * Gets the total time in Milliseconds for the duration of the Playing song, formats it as a String, and returns said String.
+	 * @param song (File)
+ 	 * @return runTime - Milliseconds in String (in terms of MM:SS)
 	 * @throws UnsupportedAudioFileException
 	 * @throws IOException
 	 */
@@ -117,10 +85,9 @@ public class TrackController {
 	}
 
 	/**
-	 * gets the total time in milliseconds
-	 * 
-	 * @param song
-	 * @return
+	 * Gets the total Time in Milliseconds for the Duration of the Song.
+	 * @param song (File)
+	 * @return runTime - Total Time in Milliseconds
 	 * @throws UnsupportedAudioFileException
 	 * @throws IOException
 	 */

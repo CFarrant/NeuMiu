@@ -49,17 +49,17 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayer;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
+
 /**
- * Controls the GIU
- * @author ME
- *
+ * The FXMLController Class
+ * @author NeuMiu Team
  */
 public class FXMLController extends StreamPlayer implements Initializable, StreamPlayerListener {
 
 	// Controllers
 	private TrackController track;
 
-	// Savable Data
+	// Save-able Data
 	private static List<Track> addedSongs;
 
 	// ListView Controls
@@ -87,23 +87,20 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	@FXML
 	private TableColumn<Track, String> titleValue, artistValue, genreValue;
 	@FXML
-	public Slider volumeSlider;
-	@FXML
-	private Slider seekBar;
+	public Slider volumeSlider, seekBar;
 	@FXML
 	private CheckBox muteBox, shuffleBox;
 	@FXML
 	private ImageView coverArt, playTrack;
 	@FXML
-	private TextField currentlyPlaying, addSongName, addSongGenre, addSongArtist, editSongName, editSongGenre,
-			editSongArtist;
+	private TextField currentlyPlaying, addSongName, addSongGenre, addSongArtist, editSongName, editSongGenre, editSongArtist;
 	@FXML
 	private Label curTime, totalTime;
 	@FXML
 	private Button cancel, save;
 
 	/**
-	 * constructor that loads songs into player
+	 * Default FXMLController Constructor
 	 */
 	public FXMLController() {
 		track = new TrackController();
@@ -169,9 +166,7 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG", "*.jpg"),
 				new FileChooser.ExtensionFilter("PNG", "*.png"));
 		File art = fileChooser.showOpenDialog(stage);
-		if (artwork != null) {
-			artwork = art.getPath();
-		}
+		artwork = art.getPath();
 	}
 
 	@FXML
@@ -228,6 +223,12 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 
 	}
 
+	/**
+	 * The Method that Saves a New Song to the Save-able Data
+	 * @param sNS - ActionEvent
+	 * @throws UnsupportedAudioFileException
+	 * @throws IOException
+	 */
 	public void saveNewSong(ActionEvent sNS) throws UnsupportedAudioFileException, IOException {
 		title = addSongName.getText();
 		artist = addSongArtist.getText();
@@ -239,9 +240,8 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	/**
-	 * Saves added and edited song info in the player
-	 * 
-	 * @param snsn
+	 * The Method that Saves an Edited Song to the Save-able Data
+	 * @param snsn - ActionEvent
 	 */
 	public void saveEditedSong(ActionEvent snsn) {
 		Track temp = addedSongs.get(currentItem);
@@ -269,9 +269,8 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	/**
-	 * mutes the volume
-	 * 
-	 * @param m
+	 * The Method that Controls the Mute Setting of the Player
+	 * @param m - ActionEvent
 	 */
 	public void mute(ActionEvent m) {
 		if (mute == true) {
@@ -300,9 +299,8 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	/**
-	 * Plays the music in the music player
-	 * 
-	 * @param pla
+	 * The Method that handles playing the Audio Sources
+	 * @param pla - MouseEvent
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
@@ -353,6 +351,12 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		}
 	}
 
+	/**
+	 * The Method that Seeks to the Next Song in the Songs List
+	 * @param next - ActionEvent
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	public void nextSong(MouseEvent next) throws ClassNotFoundException, IOException {
 		int value = 0;
 		if (currentItem < addedSongs.size() - 1) {
@@ -377,9 +381,8 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	/**
-	 * goes one song back in the list og songs and plays it
-	 * 
-	 * @param prev
+	 * The Method that Seeks to the Previous Song in the Songs List
+	 * @param next - MouseEvent
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
@@ -402,9 +405,8 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	/**
-	 * goes one song forward and plays it
-	 * 
-	 * @param sto
+	 * The Method that Halts current Playback of the Playing Song.
+	 * @param sto - MouseEvent
 	 * @throws InterruptedException
 	 */
 	public void stopSong(MouseEvent sto) throws InterruptedException {
@@ -422,38 +424,6 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		totalTime.setText("0:00");
 	}
 
-	public void updateArtwork(String path) {
-		coverArt.setImage(new Image(path));
-	}
-
-	/**
-	 * updates the playlist when songs are edited or added
-	 * 
-	 * @param artist
-	 * @param title
-	 */
-	public void updatePlaying(String artist, String title) {
-		currentlyPlaying.setText(artist + " ~ " + title);
-	}
-
-	/**
-	 * updates how long the song ha been playing
-	 * 
-	 * @param currentPlayTime
-	 */
-	public void updateCurTime(String currentPlayTime) {
-		curTime.setText(currentPlayTime);
-	}
-
-	/**
-	 * updates the length of the song
-	 * 
-	 * @param fullTime
-	 */
-	public void updateTotalTime(String fullTime) {
-		totalTime.setText(fullTime);
-	}
-
 	private void saveDB() throws IOException {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
 			out.writeObject(addedSongs);
@@ -461,9 +431,8 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	/**
-	 * loads the songs
-	 * 
-	 * @return
+	 * Loads the Save-able Data
+	 * @return - ArrayList<Track>
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
@@ -476,9 +445,8 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	/**
-	 * exits the application and stops any playing songs
-	 * 
-	 * @param event
+	 * Terminates the Application when the GUI is closed.
+	 * @param event - WindowEvent
 	 * @throws IOException
 	 */
 	public void exit(WindowEvent event) throws IOException {
@@ -520,8 +488,7 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	@Override
-	public void statusUpdated(StreamPlayerEvent arg0) {
-	}
+	public void statusUpdated(StreamPlayerEvent arg0) {}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -530,7 +497,6 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 			titleValue.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getTitle()));
 			artistValue.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getArtist()));
 			genreValue.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getGenre()));
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 	}
 }

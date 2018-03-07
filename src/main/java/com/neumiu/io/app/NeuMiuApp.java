@@ -10,13 +10,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * The NeuMiu Application Class
+ * @author NeuMiu Team
+ */
 public class NeuMiuApp extends Application {
 
 	private FXMLController control = new FXMLController();
-/**
- * runs the application
- * @param args
- */
+	
+	/**
+	 * Launches the Application
+	 * @param args (String[])
+	 */
 	public static void main(String[] args) {
 		Application.launch(NeuMiuApp.class, args);
 	}
