@@ -52,20 +52,6 @@
                       </MenuItem>
                    </items>
                 </Menu>
-                <!--Menu mnemonicParsing="false" text="Controls">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Shuffle">
-                         <graphic>
-                            <CheckBox fx:id="shuffleBox" mnemonicParsing="false" />
-                         </graphic>
-                      </MenuItem>
-                      <MenuItem mnemonicParsing="false" text="Repeat Song">
-                         <graphic>
-                            <CheckBox fx:id="shuffleBox" mnemonicParsing="false" />
-                         </graphic>
-                      </MenuItem>
-                  </items>
-                </Menu-->
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#helpScreen" text="About" />
