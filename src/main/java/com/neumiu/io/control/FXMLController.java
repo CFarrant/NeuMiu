@@ -195,6 +195,7 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 
 	@FXML
 	private void editSong(ActionEvent q) throws IOException {
+		saveDB();
 		Parent root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/EditSong.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -214,7 +215,8 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	@FXML
-	private void addSong(ActionEvent k) throws IOException {
+	private void addSong(ActionEvent k) throws IOException, ClassNotFoundException {
+		saveDB();
 		System.out.println("TEST");
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/AddSong.fxml"));
 		Stage stage = new Stage();
@@ -230,13 +232,19 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	 * @param sNS - ActionEvent
 	 * @throws UnsupportedAudioFileException
 	 * @throws IOException
+	 * @throws ClassNotFoundException 
 	 */
-	public void saveNewSong(ActionEvent sNS) throws UnsupportedAudioFileException, IOException {
+	public void saveNewSong(ActionEvent sNS) throws UnsupportedAudioFileException, IOException, ClassNotFoundException {
+		load();
 		title = addSongName.getText();
 		artist = addSongArtist.getText();
 		genre = addSongGenre.getText();
-		addedSongs.add(new Track(title, genre, artist, newSong, artwork));
-		syncDB();
+		try {			
+			addedSongs.add(new Track(title, genre, artist, newSong, artwork));
+			syncDB();
+		} catch (NullPointerException | IllegalArgumentException e) {
+			showAlert("Warning", null, "No song file was selected to be added!", AlertType.ERROR);
+		}
 		Stage stage = (Stage) cancel.getScene().getWindow();
 		stage.close();
 	}
@@ -244,18 +252,22 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	/**
 	 * The Method that Saves an Edited Song to the Save-able Data
 	 * @param snsn - ActionEvent
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public void saveEditedSong(ActionEvent snsn) {
+	public void saveEditedSong(ActionEvent snsn) throws ClassNotFoundException, IOException {
+		load();
 		Track temp = addedSongs.get(currentItem);
-		addedSongs.remove(temp);
-		if (!(temp.getTitle() == editSongName.getText()) || !editSongName.getText().isEmpty()) {
-			temp.setTitle(addSongName.getText());
+		Track edited = new Track();
+		addedSongs.remove(currentItem);
+		if (temp.getTitle() != editSongName.getText() || !editSongName.getText().isEmpty()) {
+			edited.setTitle(editSongName.getText());
 		}
-		if (!(temp.getTitle() == editSongName.getText()) || !editSongArtist.getText().isEmpty()) {
-			temp.setArtist(addSongArtist.getText());
+		if (!(temp.getArtist() == editSongArtist.getText()) || !editSongArtist.getText().isEmpty()) {
+			temp.setArtist(editSongArtist.getText());
 		}
-		if (!(temp.getTitle() == editSongName.getText()) || !editSongGenre.getText().isEmpty()) {
-			temp.setGenre(addSongGenre.getText());
+		if (!(temp.getGenre() == editSongGenre.getText()) || !editSongGenre.getText().isEmpty()) {
+			temp.setGenre(editSongGenre.getText());
 		}
 		if (!(temp.getArtwork() == artwork)) {
 			if (artwork == null) {
@@ -264,7 +276,7 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 				temp.setArtwork(artwork);
 			}
 		}
-		addedSongs.set(currentItem-1, temp);
+		addedSongs.add(edited);
 		syncDB();
 		Stage stage = (Stage) cancel.getScene().getWindow();
 		stage.close();
