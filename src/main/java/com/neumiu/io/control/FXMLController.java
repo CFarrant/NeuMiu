@@ -192,8 +192,9 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	@FXML
-	private void editSong(ActionEvent q) throws IOException {
+	private void editSong(ActionEvent q) throws IOException, ClassNotFoundException {
 		saveDB();
+		load();
 		Parent root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/EditSong.fxml"));
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
@@ -203,18 +204,21 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	}
 
 	@FXML
-	private void removeSong(ActionEvent rms) {
+	private void removeSong(ActionEvent rms) throws IOException, ClassNotFoundException {
 		try {
 			addedSongs.remove(currentItem);
 			syncDB();
 		} catch (IndexOutOfBoundsException ex) {
 			showAlert("Warning", null, "There are no songs to remove!", AlertType.WARNING);
 		}
+		saveDB();
+		load();
 	}
 
 	@FXML
 	private void addSong(ActionEvent k) throws IOException, ClassNotFoundException {
 		saveDB();
+		load();
 		System.out.println("TEST");
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/AddSong.fxml"));
 		Stage stage = new Stage();
