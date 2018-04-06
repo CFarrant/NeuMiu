@@ -1,6 +1,8 @@
 package com.neumiu.io.control;
 
 import java.io.File;
+
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -97,7 +99,7 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 	@FXML
 	private Label curTime, totalTime;
 	@FXML
-	private Button cancel, save;
+	private Button cancel;
 
 	/**
 	 * Default FXMLController Constructor
@@ -184,6 +186,7 @@ public class FXMLController extends StreamPlayer implements Initializable, Strea
 		File song = fileChooser.showOpenDialog(stage);
 		newSong = song.getPath();
 	}
+	
 
 	@FXML
 	private void closeButton(ActionEvent h) {

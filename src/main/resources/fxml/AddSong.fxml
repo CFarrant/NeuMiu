@@ -55,6 +55,6 @@
 			</children>
 		</GridPane>
 		<Button fx:id="cancel" layoutX="104.0" layoutY="398.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="25.0" prefWidth="74.0" text="Cancel" />
-		<Button fx:id="save" layoutX="198.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveNewSong" prefHeight="25.0" prefWidth="74.0" text="Save" />
+		<Button layoutX="198.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveNewSong" prefHeight="25.0" prefWidth="74.0" text="Save" />
 	</children>
 </AnchorPane>
