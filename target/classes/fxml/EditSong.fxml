@@ -69,12 +69,11 @@
 		<Button fx:id="cancel" layoutX="104.0" layoutY="398.0"
 			mnemonicParsing="false" onAction="#closeButton" prefHeight="25.0"
 			prefWidth="74.0" text="Cancel" />
-<<<<<<< HEAD
+
 		<Button layoutX="198.0" layoutY="398.0" mnemonicParsing="false"
 			prefHeight="25.0" prefWidth="74.0" text="Save" onAction="#saveNewSong" />
-=======
+
 		<Button fx:id="save" layoutX="198.0" layoutY="398.0" mnemonicParsing="false"
 			prefHeight="25.0" prefWidth="74.0" text="Save" onAction="#saveEditedSong" />
->>>>>>> cdc19fe85b89476fdc76d11f914ce8f6f42834a5
 	</children>
 </AnchorPane>
