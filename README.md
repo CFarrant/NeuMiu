@@ -27,10 +27,10 @@
 >| Audio Controls | Allows changing, pausing or playing a song. | DONE |
 >| Seek Bar | Allows following along where the user is currently at in the song. | DONE |
 >| Volume Slider | Allows controlling how loud the output audio is. | DONE |
->| Add Music | Allows user to import music. | PLANNED |
->| Edit Music Info | Allows user to modify the info of the song. | PLANNED |
+>| Add Music | Allows user to import music. | DONE |
+>| Edit Music Info | Allows user to modify the info of the song. | DONE |
+>| Sort by: Length/Title/Import Date | Allows users to sort their songs via their length, title, or the date that they were Imported on. | DONE |
 >| Song Shuffling | Shuffles songs. | PLANNED |
->| Sort by: Length/Title/Import Date | Allows users to sort their songs via their length, title, or the date that they were Imported on. | STRETCH |
 >| Create/Edit Playlists | Allows adding select tracks into a playlist that can be played. | STRETCH |
 >| Time Stamping | Allows Users to place flags at certain times points. | STRETCH |
 >| EQ~ing | Lets users have their own unique EQ settings. | STRETCH |
