@@ -1,7 +1,7 @@
 # NeuMiu
 
 ### Summary:  
->A music player that sorts music by the user's choice in to multiple different types of playlists, keeps track of how many times a song has been played, allows the user to upload their own music, allows a user to assign an image to a song and rename their files, and can sort by name, genre, artist, and song length.
+>A music player that allows the user to import their own music, allows a user to assign an image to a song and rename their files, and can sort by name, genre, artist, and song length.
 
 ### Scope Exclusions:  
 >Will __not__ _do your laundry_, _make you a sandwich_, or _complete any other form of __housekeeping___.  
@@ -29,7 +29,7 @@
 >| Volume Slider | Allows controlling how loud the output audio is. | DONE |
 >| Add Music | Allows user to import music. | DONE |
 >| Edit Music Info | Allows user to modify the info of the song. | DONE |
->| Sort by: Length/Title/Import Date | Allows users to sort their songs via their length, title, or the date that they were Imported on. | DONE |
+>| Sort by: Length/Title | Allows users to sort their songs via their length, or their title. | DONE |
 >| Song Shuffling | Shuffles songs. | PLANNED |
 >| Create/Edit Playlists | Allows adding select tracks into a playlist that can be played. | STRETCH |
 >| Time Stamping | Allows Users to place flags at certain times points. | STRETCH |
